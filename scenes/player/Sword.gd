@@ -51,6 +51,9 @@ func spin_axe(delta:float):
 
 func retrieve_position():
 	if(Input.is_action_just_pressed("throw") and is_returnable):
+		if(body_sticked_on != null):
+			body_sticked_on.toggle_frozen()
+		body_sticked_on = null
 		state = RETRIEVE
 		fly_speed = 4 * 60
 
@@ -100,6 +103,7 @@ func _on_Area2D_body_entered(body):
 		is_returnable = false
 	elif (body.name == "Enemy" and state == FLY):
 		body_sticked_on = body
+		body_sticked_on.toggle_frozen()
 		state = STICK
 
 func _on_ReturnTimer_timeout():
