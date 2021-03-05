@@ -42,6 +42,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 25, -7.5 ), Vector2( 30, -10 ), Vector2( 15, -8 ), Vector2( 0, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "SwingAxe"
@@ -108,6 +120,7 @@ position = Vector2( 4.79818, 7.5495 )
 rotation = -2.93557e-08
 scale = Vector2( 1.01521, 1.0268 )
 shape = SubResource( 3 )
+disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/enemy/enemy_sprite.png" type="Texture" id=1]
 [ext_resource path="res://scenes/enemy/Enemy.gd" type="Script" id=2]
@@ -8,6 +8,9 @@ extents = Vector2( 8, 8 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8, 8 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 128.0
 
 [node name="Enemy" type="KinematicBody2D"]
 collision_layer = 4
@@ -21,11 +24,19 @@ texture = ExtResource( 1 )
 visible = false
 shape = SubResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="EnemyHitbox" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
 shape = SubResource( 2 )
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+
+[node name="AI" type="Node2D" parent="."]
+
+[node name="DectectionZone" type="Area2D" parent="AI"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AI/DectectionZone"]
+shape = SubResource( 3 )
+[connection signal="area_entered" from="EnemyHitbox" to="." method="_on_EnemyHitbox_area_entered"]
+[connection signal="body_entered" from="AI/DectectionZone" to="." method="_on_DectectionZone_body_entered"]
+[connection signal="body_exited" from="AI/DectectionZone" to="." method="_on_DectectionZone_body_exited"]

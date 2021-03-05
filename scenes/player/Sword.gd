@@ -9,6 +9,7 @@ export (float) var fly_speed = 50 * 60
 
 onready var animationPlayer = $"SwordArea/AnimationPlayer"
 onready var parent: = get_parent()
+onready var swordCollision = $"SwordArea/CollisionShape2D"
 
 const recharge_mana_amount = 5
 
@@ -17,7 +18,6 @@ var state: int = IDLE
 var velocity: = Vector2.ZERO
 var pos: = Vector2.ZERO
 var speed:float
-var is_thrown = false;
 var is_returnable = false
 var body_sticked_on;
 var mana = recharge_mana_amount
@@ -50,6 +50,7 @@ func idle():
 		attack()
 	if Input.is_action_just_pressed("throw"):
 		flying()
+		swordCollision.disabled = false
 		fly_speed = 20 * 60
 		if(!is_returnable):
 			 $ReturnTimer.start()
@@ -66,6 +67,10 @@ func retrieve_position():
 		body_sticked_on = null
 		state = RETRIEVE
 		fly_speed = 4 * 60
+		
+func force_retrieve():
+	state = RETRIEVE
+	fly_speed = 4 * 60
 
 func fly(delta:float):
 	var trans = get_global_transform()
@@ -96,8 +101,11 @@ func idle_position():
 	state = IDLE
 
 func stick():
-	global_position = body_sticked_on.global_position
-	retrieve_position()
+	if (!weakref(body_sticked_on).get_ref()):
+		force_retrieve()
+	else:
+		global_position = body_sticked_on.global_position
+		retrieve_position()
 
 func get_target()->Vector2:
 	var player = get_tree().get_root().find_node("Player", true, false)
@@ -119,3 +127,5 @@ func _on_Area2D_body_entered(body):
 func _on_ReturnTimer_timeout():
 	is_returnable = true
 
+func is_flying()->bool:
+	return state == FLY
