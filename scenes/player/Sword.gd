@@ -1,6 +1,6 @@
 extends Node2D
 
-enum {IDLE, FLY, RETRIEVE}
+enum {IDLE, FLY, RETRIEVE, STICK}
 
 export (float) var acceleration = 2 * 60
 export (float) var fly_speed = 50 * 60
@@ -15,6 +15,7 @@ var pos: = Vector2.ZERO
 var speed:float
 var is_thrown = false;
 var is_returnable = false
+var body_sticked_on;
 
 func _ready():
 	idle_position()
@@ -27,6 +28,8 @@ func _physics_process(delta):
 			fly(delta)
 		RETRIEVE:
 			retrieve(delta)
+		STICK:
+			stick()
 
 func attack():
 	animationPlayer.play("Swing")
@@ -45,7 +48,12 @@ func idle():
 
 func spin_axe(delta:float):
 	rotation_degrees += 360*delta*7
-	
+
+func retrieve_position():
+	if(Input.is_action_just_pressed("throw") and is_returnable):
+		state = RETRIEVE
+		fly_speed = 4 * 60
+
 func fly(delta:float):
 	var trans = get_global_transform()
 	var new_pos = trans.basis_xform(Vector2(0,0))
@@ -54,9 +62,7 @@ func fly(delta:float):
 	pos += velocity * delta 
 	global_position = pos
 	spin_axe(delta)
-	if(Input.is_action_just_pressed("throw") and is_returnable):
-		state = RETRIEVE
-		fly_speed = 4 * 60
+	retrieve_position()
 
 func retrieve(delta:float):
 	velocity += (get_target() - pos).normalized() * speed
@@ -76,6 +82,10 @@ func flying():
 func idle_position():
 	state = IDLE
 
+func stick():
+	global_position = body_sticked_on.global_position
+	retrieve_position()
+
 func get_target()->Vector2:
 	var player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = (player.global_position)
@@ -89,7 +99,8 @@ func _on_Area2D_body_entered(body):
 		body.renew_axe()
 		is_returnable = false
 	elif (body.name == "Enemy" and state == FLY):
-		print("enemy RETRIEVE!")
+		body_sticked_on = body
+		state = STICK
 
 func _on_ReturnTimer_timeout():
 	is_returnable = true
