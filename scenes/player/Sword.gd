@@ -2,11 +2,15 @@ extends Node2D
 
 enum {IDLE, FLY, RETRIEVE, STICK}
 
+
+
 export (float) var acceleration = 2 * 60
 export (float) var fly_speed = 50 * 60
 
 onready var animationPlayer = $"SwordArea/AnimationPlayer"
 onready var parent: = get_parent()
+
+const recharge_mana_amount = 5
 
 var can_return: bool = true
 var state: int = IDLE
@@ -16,8 +20,10 @@ var speed:float
 var is_thrown = false;
 var is_returnable = false
 var body_sticked_on;
+var mana = recharge_mana_amount
 
 func _ready():
+	mana = recharge_mana_amount
 	idle_position()
 
 func _physics_process(delta):
@@ -32,7 +38,11 @@ func _physics_process(delta):
 			stick()
 
 func attack():
-	animationPlayer.play("Swing")
+	if(mana > 0):
+		animationPlayer.play("Swing")
+		mana -= 1
+		print(mana)
+
 	
 func idle():
 	can_return = false
@@ -108,3 +118,4 @@ func _on_Area2D_body_entered(body):
 
 func _on_ReturnTimer_timeout():
 	is_returnable = true
+
