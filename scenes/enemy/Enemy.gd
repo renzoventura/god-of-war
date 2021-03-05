@@ -28,15 +28,16 @@ func move():
 	motion.x = 10
 
 func _on_Area2D_body_entered(body):
-	print(body.name)
+#	print(body.name)
 	pass # Replace with function body.
 
 func _on_Area2D_area_entered(area):
 	if (area.name == "SwordArea"):
-		print("HIT!");
+#		print("HIT!");
+		pass
 
 func toggle_frozen():
-	print("TOGGLED")
+#	print("TOGGLED")
 	isFrozen = !isFrozen;
 	if(isFrozen):
 		state = FROZEN

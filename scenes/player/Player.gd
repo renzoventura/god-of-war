@@ -102,7 +102,6 @@ func renew_axe():
 		enable_axe_movement()
 
 func toggle_hit_box():
-	print("hit box disabled = " + str(!player_hit_box.disabled))
 	player_hit_box.disabled = !player_hit_box.disabled
 
 func _on_DashTimer_timeout():
