@@ -1,6 +1,6 @@
 extends Node2D
 
-enum {IDLE, FLY, STICK}
+enum {IDLE, FLY, RETRIEVE}
 
 export (float) var acceleration = 2 * 60
 export (float) var fly_speed = 50 * 60
@@ -25,8 +25,8 @@ func _physics_process(delta):
 			idle()
 		FLY:
 			fly(delta)
-		STICK:
-			stick(delta)
+		RETRIEVE:
+			retrieve(delta)
 
 func attack():
 	animationPlayer.play("Swing")
@@ -36,7 +36,7 @@ func idle():
 	if Input.is_action_just_pressed("attack"):
 		attack()
 	if Input.is_action_just_pressed("throw"):
-		retrieve()
+		flying()
 		fly_speed = 20 * 60
 		if(!is_returnable):
 			 $ReturnTimer.start()
@@ -55,10 +55,10 @@ func fly(delta:float):
 	global_position = pos
 	spin_axe(delta)
 	if(Input.is_action_just_pressed("throw") and is_returnable):
-		state = STICK
+		state = RETRIEVE
 		fly_speed = 4 * 60
 
-func stick(delta:float):
+func retrieve(delta:float):
 	velocity += (get_target() - pos).normalized() * speed
 	velocity = velocity.clamped(fly_speed)
 	pos += velocity * delta
@@ -66,7 +66,7 @@ func stick(delta:float):
 	spin_axe(delta)
 	var dist = global_position.distance_to(get_target())
 
-func retrieve():
+func flying():
 	fly_speed = 4 * 60
 	state = FLY
 	velocity = (get_global_mouse_position() - global_position).normalized() * fly_speed
@@ -85,9 +85,11 @@ func _on_Timer_timeout():
 	can_return = true
 
 func _on_Area2D_body_entered(body):
-	if(body.name == "Player" and state == STICK and is_returnable):
+	if(body.name == "Player" and state == RETRIEVE and is_returnable):
 		body.renew_axe()
 		is_returnable = false
+	elif (body.name == "Enemy" and state == FLY):
+		print("enemy RETRIEVE!")
 
 func _on_ReturnTimer_timeout():
 	is_returnable = true
