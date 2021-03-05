@@ -2,9 +2,8 @@ extends Node2D
 
 enum {IDLE, FLY, STICK}
 
-export (float) var acceleration = 0.1 * 60
-export (float) var fly_speed = 8 * 60
-export (float) var return_speed = 1 * 60
+export (float) var acceleration = 2 * 60
+export (float) var fly_speed = 50 * 60
 
 onready var animationPlayer = $"SwordArea/AnimationPlayer"
 onready var parent: = get_parent()
@@ -38,7 +37,7 @@ func idle():
 		attack()
 	if Input.is_action_just_pressed("throw"):
 		retrieve()
-		fly_speed = 8 * 60
+		fly_speed = 20 * 60
 		if(!is_returnable):
 			 $ReturnTimer.start()
 		get_tree().call_group("Player", "disable_axe_movement")
@@ -84,7 +83,6 @@ func get_target()->Vector2:
 
 func _on_Timer_timeout():
 	can_return = true
-	speed = return_speed
 
 func _on_Area2D_body_entered(body):
 	if(body.name == "Player" and state == STICK and is_returnable):

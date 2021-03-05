@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 var motion = Vector2(0,0)
-var SPEED = 200;
-var MAX_SPEED = 200;
+var SPEED = 100;
+var MAX_SPEED = 120;
 const FRICTION = 0.1
 
 onready var sword_position = $"Center"
@@ -14,14 +14,15 @@ var is_thrown = false
 func _process(delta):
 	move()
 	move_sword()
+	dash()
 	move_and_slide(motion)
 
 func move():
 	if(is_thrown):
-		SPEED = 250;
+		SPEED = 120;
 		MAX_SPEED = SPEED;
 	else: 
-		SPEED = 200;
+		SPEED = 100;
 		MAX_SPEED = SPEED;
 	if Input.is_action_pressed("up"):
 		motion.y = clamp(motion.y - SPEED, -MAX_SPEED, 0)
@@ -35,6 +36,11 @@ func move():
 		motion.x = clamp(motion.x + SPEED, 0, MAX_SPEED)
 	else: 
 		motion.x = lerp(motion.x, 0, FRICTION)
+
+func dash():
+	if(Input.is_action_just_pressed("dash")):
+		print("DASHING")
+
 
 func move_sword():
 	if(!is_thrown):
