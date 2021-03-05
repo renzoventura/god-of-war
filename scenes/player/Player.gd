@@ -1,29 +1,54 @@
 extends KinematicBody2D
 
+enum {ATTACK, IDLE, DASH, HURT}
+
+const FRICTION = 0.1
+
+var DASH_TIME = 0.1
+var dash_acc = 0 
 var motion = Vector2(0,0)
 var SPEED = 100;
 var MAX_SPEED = 120;
-const FRICTION = 0.1
+var DASH_SPEED = 500;
+var is_thrown = false
+var state: int = IDLE
+var isDashEnabled = true;
 
 onready var sword_position = $"Center"
 onready var sword_position_container = $"Center/offset/Node2D"
 onready var sword = $"Center/offset/Node2D/Sword"
-
-var is_thrown = false
+onready var player_hit_box = $"CollisionShape2D"
+onready var dashTimer = $"DashTimer"
 
 func _process(delta):
+	match state:
+		IDLE:
+			idle()
+		DASH:
+			dashing(delta)
+		HURT:
+			pass
+
+func idle():
 	move()
 	move_sword()
 	dash()
 	move_and_slide(motion)
-
+	
+func updateSpeed():
+	if(state == DASH):
+		SPEED = 500;
+		MAX_SPEED = SPEED;
+	else:
+		if(is_thrown):
+			SPEED = 150;
+			MAX_SPEED = SPEED;
+		else: 
+			SPEED = 100;
+			MAX_SPEED = SPEED;
+			
 func move():
-	if(is_thrown):
-		SPEED = 120;
-		MAX_SPEED = SPEED;
-	else: 
-		SPEED = 100;
-		MAX_SPEED = SPEED;
+	updateSpeed()
 	if Input.is_action_pressed("up"):
 		motion.y = clamp(motion.y - SPEED, -MAX_SPEED, 0)
 	elif Input.is_action_pressed("down"):
@@ -38,9 +63,22 @@ func move():
 		motion.x = lerp(motion.x, 0, FRICTION)
 
 func dash():
-	if(Input.is_action_just_pressed("dash")):
-		print("DASHING")
+	if(Input.is_action_just_pressed("dash") and isDashEnabled):
+		toggle_hit_box()
+		isDashEnabled = false
+		dashTimer.start()
+		state = DASH
 
+func dashing(delta):
+	move()
+	dash_acc += delta
+	SPEED = 500
+	if dash_acc >= DASH_TIME:    
+		state = IDLE
+		toggle_hit_box()
+		motion = Vector2(0, 0)
+		dash_acc = 0
+	move_and_slide(motion)
 
 func move_sword():
 	if(!is_thrown):
@@ -62,3 +100,12 @@ func renew_axe():
 		var axeInstance = preloadAxe.instance();
 		sword_position_container.call_deferred("add_child",axeInstance)
 		enable_axe_movement()
+
+func toggle_hit_box():
+	print("hit box disabled = " + str(!player_hit_box.disabled))
+	player_hit_box.disabled = !player_hit_box.disabled
+	
+
+
+func _on_DashTimer_timeout():
+	isDashEnabled = true;

@@ -43,7 +43,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 25, -7.5 ), Vector2( 30, -10 ), Vector2( 15, -8 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "SwingAxe"
 length = 0.5
 tracks/0/type = "value"
@@ -83,7 +83,7 @@ tracks/2/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 25, -8 ), Vector2( 30, -10 ), Vector2( 15, -8 ), Vector2( 0, 0 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 5.27744, 7.04304 )
 
 [node name="Axe" type="Node2D"]
@@ -95,20 +95,19 @@ collision_layer = 2
 collision_mask = 5
 
 [node name="Sprite" type="Sprite" parent="SwordArea"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 centered = false
 flip_v = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SwordArea"]
 anims/Swing = SubResource( 1 )
-anims/SwingAxe = SubResource( 3 )
+anims/SwingAxe = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordArea"]
 position = Vector2( 4.79818, 7.5495 )
 rotation = -2.93557e-08
 scale = Vector2( 1.01521, 1.0268 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Timer" type="Timer" parent="."]
 
