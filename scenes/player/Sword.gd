@@ -6,7 +6,7 @@ export (float) var acceleration = 0.1 * 60
 export (float) var fly_speed = 8 * 60
 export (float) var return_speed = 1 * 60
 
-onready var animationPlayer = $"Area2D/AnimationPlayer"
+onready var animationPlayer = $"SwordArea/AnimationPlayer"
 onready var parent: = get_parent()
 
 var can_return: bool = true
@@ -38,6 +38,7 @@ func idle():
 		attack()
 	if Input.is_action_just_pressed("throw"):
 		retrieve()
+		fly_speed = 8 * 60
 		if(!is_returnable):
 			 $ReturnTimer.start()
 		get_tree().call_group("Player", "disable_axe_movement")
@@ -56,6 +57,7 @@ func fly(delta:float):
 	spin_axe(delta)
 	if(Input.is_action_just_pressed("throw") and is_returnable):
 		state = STICK
+		fly_speed = 4 * 60
 
 func stick(delta:float):
 	velocity += (get_target() - pos).normalized() * speed

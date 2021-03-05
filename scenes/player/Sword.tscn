@@ -89,20 +89,22 @@ extents = Vector2( 5.27744, 7.04304 )
 [node name="Axe" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="SwordArea" type="Area2D" parent="."]
 rotation = 1.74533
+collision_layer = 2
+collision_mask = 5
 
-[node name="Sprite" type="Sprite" parent="Area2D"]
+[node name="Sprite" type="Sprite" parent="SwordArea"]
 scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 centered = false
 flip_v = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SwordArea"]
 anims/Swing = SubResource( 1 )
 anims/SwingAxe = SubResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordArea"]
 position = Vector2( 4.79818, 7.5495 )
 rotation = -2.93557e-08
 scale = Vector2( 1.01521, 1.0268 )
@@ -112,5 +114,5 @@ shape = SubResource( 2 )
 
 [node name="ReturnTimer" type="Timer" parent="."]
 wait_time = 0.5
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="SwordArea" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="ReturnTimer" to="." method="_on_ReturnTimer_timeout"]
