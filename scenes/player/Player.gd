@@ -6,8 +6,8 @@ var MAX_SPEED = 200;
 const FRICTION = 0.1
 
 onready var sword_position = $"Center"
-onready var sword_position_container = $"Center/offset"
-onready var sword = $"Center/offset/Sword"
+onready var sword_position_container = $"Center/offset/Node2D"
+onready var sword = $"Center/offset/Node2D/Sword"
 
 
 var is_thrown = false
@@ -47,10 +47,9 @@ func enable_axe_movement():
 func renew_axe():
 	if(is_thrown):
 		for n in sword_position_container.get_children():
-			sword_position_container.remove_child(n)
 			n.queue_free()
 		var preloadAxe = preload("res://scenes/player/Sword.tscn")
-		var axeInstance = preloadAxe;
-		sword_position_container.add_child(axeInstance)
-		print(str(sword_position_container.get_children().size()))
+		var axeInstance = preloadAxe.instance();
+		sword_position_container.call_deferred("add_child", axeInstance)
+		is_thrown = false
 	

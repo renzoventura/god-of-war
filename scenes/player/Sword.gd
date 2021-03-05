@@ -8,14 +8,16 @@ var is_thrown = false;
 
 enum {IDLE, FLY, STICK}
 export (float) var acceleration = 0.1 * 60
-export (float) var retrieve_speed = 3.5 * 60
-export (float) var return_speed = 0.5 * 60
+export (float) var retrieve_speed = 8 * 60
+export (float) var return_speed = 0.1 * 60
 onready var parent: = get_parent()
 var can_return: bool = true
 var state: int = IDLE
 var velocity: = Vector2.ZERO
 var pos: = Vector2.ZERO
 var speed:float
+
+var is_returnable = false
 
 func _ready():
 	idle_position()
@@ -37,6 +39,8 @@ func idle():
 		attack()
 	if Input.is_action_just_pressed("throw"):
 		retrieve()
+		if(!is_returnable):
+			 $ReturnTimer.start()
 		get_tree().call_group("Player", "disable_axe_movement")
 
 func fly(delta:float):
@@ -45,7 +49,8 @@ func fly(delta:float):
 	pos += velocity*delta #variable for disconnecting from parent movement
 	global_position = pos
 	rotation_degrees += 360*delta*7
-	if can_return && pos.distance_to(get_target()) < 8:
+	if can_return && pos.distance_to(get_target()) < 10:
+		print("STICKING")
 		state = STICK
 
 func stick():
@@ -76,3 +81,13 @@ func get_target()->Vector2:
 func _on_Timer_timeout():
 	can_return = true
 	speed = return_speed
+
+
+func _on_Area2D_body_entered(body):
+	if(body.name == "Player" and state == FLY and is_returnable):
+		body.renew_axe()
+		is_returnable = false
+
+
+func _on_ReturnTimer_timeout():
+	is_returnable = true

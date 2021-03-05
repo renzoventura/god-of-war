@@ -26,5 +26,7 @@ shape = SubResource( 1 )
 position = Vector2( 15, 15 )
 rotation = -6.28319
 
-[node name="Sword" parent="Center/offset" instance=ExtResource( 3 )]
+[node name="Node2D" type="Node2D" parent="Center/offset"]
+
+[node name="Sword" parent="Center/offset/Node2D" instance=ExtResource( 3 )]
 rotation = -1.49012e-08
