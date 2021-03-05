@@ -7,7 +7,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 collision_mask = 4
 script = ExtResource( 2 )
 
@@ -22,6 +24,7 @@ shape = SubResource( 1 )
 
 [node name="offset" type="Position2D" parent="Center"]
 position = Vector2( 15, 15 )
-rotation = -1.74533
+rotation = -6.28319
 
 [node name="Sword" parent="Center/offset" instance=ExtResource( 3 )]
+rotation = -1.49012e-08

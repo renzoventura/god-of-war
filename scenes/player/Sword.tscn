@@ -87,7 +87,6 @@ tracks/2/keys = {
 extents = Vector2( 5.27744, 3.44976 )
 
 [node name="Axe" type="Node2D"]
-rotation = 1.74533
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -104,12 +103,10 @@ anims/Swing = SubResource( 1 )
 anims/SwingAxe = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
 position = Vector2( 4.79944, 10.5168 )
 rotation = -2.93557e-08
 scale = Vector2( 1.01521, 1.0268 )
 shape = SubResource( 2 )
 
-[node name="ThrownAxeContainerPosition" type="Position2D" parent="."]
-
-[node name="ThrownAxeContainer" type="Node2D" parent="ThrownAxeContainerPosition"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0

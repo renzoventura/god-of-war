@@ -6,6 +6,7 @@ var MAX_SPEED = 200;
 const FRICTION = 0.1
 
 onready var sword_position = $"Center"
+onready var sword_position_container = $"Center/offset"
 onready var sword = $"Center/offset/Sword"
 
 
@@ -14,7 +15,6 @@ var is_thrown = false
 func _process(delta):
 	move()
 	move_sword()
-	attack()
 	move_and_slide(motion)
 
 func move():
@@ -30,12 +30,27 @@ func move():
 		motion.x = clamp(motion.x + SPEED, 0, MAX_SPEED)
 	else: 
 		motion.x = lerp(motion.x, 0, FRICTION)
-
+#
 func move_sword():
-	sword_position.look_at(get_global_mouse_position())
+	if(!is_thrown):
+		sword_position.look_at(get_global_mouse_position())
+	else: 
+		pass
+
+
+func disable_axe_movement():
+	is_thrown = true
 	
-func attack():
-	if (Input.is_action_just_pressed("attack")):
-		sword.attack()
-
-
+func enable_axe_movement():
+	is_thrown = false
+	
+func renew_axe():
+	if(is_thrown):
+		for n in sword_position_container.get_children():
+			sword_position_container.remove_child(n)
+			n.queue_free()
+		var preloadAxe = preload("res://scenes/player/Sword.tscn")
+		var axeInstance = preloadAxe;
+		sword_position_container.add_child(axeInstance)
+		print(str(sword_position_container.get_children().size()))
+	
