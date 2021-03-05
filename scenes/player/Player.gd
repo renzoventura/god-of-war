@@ -3,6 +3,7 @@ extends KinematicBody2D
 enum {ATTACK, IDLE, DASH, HURT}
 
 const FRICTION = 0.1
+const DASH_COST = 2
 
 var DASH_TIME = 0.1
 var dash_acc = 0 
@@ -19,6 +20,12 @@ onready var sword_position_container = $"Center/offset/Node2D"
 onready var sword = $"Center/offset/Node2D/Sword"
 onready var player_hit_box = $"CollisionShape2D"
 onready var dashTimer = $"DashTimer"
+onready var staminaChargerTimer = $"StaminaChargerTimer"
+
+var stamina = 5
+
+func _ready():
+	staminaChargerTimer.start()
 
 func _process(delta):
 	match state:
@@ -63,12 +70,21 @@ func move():
 		motion.x = lerp(motion.x, 0, FRICTION)
 
 func dash():
-	if(Input.is_action_just_pressed("dash") and isDashEnabled):
+	if(Input.is_action_just_pressed("dash") and isDashEnabled and has_stamina_for(DASH_COST)):
+		stamina -= DASH_COST
 		toggle_hit_box()
 		isDashEnabled = false
 		dashTimer.start()
 		state = DASH
 
+func has_stamina_for(cost) -> bool:
+	if stamina > cost:
+#		print("Has stamina")
+		return true;
+	else: 
+#		print("NO stamina")
+		return false
+		
 func dashing(delta):
 	move()
 	dash_acc += delta
@@ -106,3 +122,7 @@ func toggle_hit_box():
 
 func _on_DashTimer_timeout():
 	isDashEnabled = true;
+
+func _on_StaminaCharger_timeout():
+#	print("recharging")
+	stamina += 1

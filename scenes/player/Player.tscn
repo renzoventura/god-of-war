@@ -31,4 +31,7 @@ rotation = -6.28319
 rotation = -1.49012e-08
 
 [node name="DashTimer" type="Timer" parent="."]
+
+[node name="StaminaChargerTimer" type="Timer" parent="."]
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
+[connection signal="timeout" from="StaminaChargerTimer" to="." method="_on_StaminaCharger_timeout"]
