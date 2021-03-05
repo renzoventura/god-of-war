@@ -51,7 +51,7 @@ func fly(delta:float):
 	var new_pos = trans.basis_xform(Vector2(0,0))
 	velocity += (new_pos).normalized() * speed
 	velocity = velocity.clamped(fly_speed)
-	pos += velocity*delta #variable for disconnecting from parent movement
+	pos += velocity * delta 
 	global_position = pos
 	spin_axe(delta)
 	if(Input.is_action_just_pressed("throw") and is_returnable):
@@ -60,7 +60,7 @@ func fly(delta:float):
 func stick(delta:float):
 	velocity += (get_target() - pos).normalized() * speed
 	velocity = velocity.clamped(fly_speed)
-	pos += velocity*delta #variable for disconnecting from parent movement
+	pos += velocity * delta
 	global_position = pos
 	spin_axe(delta)
 	var dist = global_position.distance_to(get_target())
@@ -70,7 +70,7 @@ func retrieve():
 	state = FLY
 	velocity = (get_global_mouse_position() - global_position).normalized() * fly_speed
 	speed = acceleration
-	pos = global_position #variable for disconnecting from parent movement
+	pos = global_position
 
 func idle_position():
 	state = IDLE
