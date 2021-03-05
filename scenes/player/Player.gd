@@ -17,6 +17,12 @@ func _process(delta):
 	move_and_slide(motion)
 
 func move():
+	if(is_thrown):
+		SPEED = 250;
+		MAX_SPEED = SPEED;
+	else: 
+		SPEED = 200;
+		MAX_SPEED = SPEED;
 	if Input.is_action_pressed("up"):
 		motion.y = clamp(motion.y - SPEED, -MAX_SPEED, 0)
 	elif Input.is_action_pressed("down"):
@@ -38,10 +44,10 @@ func move_sword():
 
 func disable_axe_movement():
 	is_thrown = true
-	
+
 func enable_axe_movement():
 	is_thrown = false
-	
+
 func renew_axe():
 	if(is_thrown):
 		for n in sword_position_container.get_children():
@@ -50,4 +56,3 @@ func renew_axe():
 		var axeInstance = preloadAxe.instance();
 		sword_position_container.call_deferred("add_child",axeInstance)
 		enable_axe_movement()
-	
