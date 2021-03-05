@@ -1,13 +1,15 @@
 extends KinematicBody2D
 
 var motion = Vector2(0,0)
-var motion_up = Vector2(0,-1)
 var SPEED = 200;
 var MAX_SPEED = 200;
 const FRICTION = 0.1
 
 onready var sword_position = $"Center"
 onready var sword = $"Center/offset/Sword"
+
+
+var is_thrown = false
 
 func _process(delta):
 	move()
@@ -35,4 +37,5 @@ func move_sword():
 func attack():
 	if (Input.is_action_just_pressed("attack")):
 		sword.attack()
-		
+
+

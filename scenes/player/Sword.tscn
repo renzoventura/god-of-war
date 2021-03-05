@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/player/axe.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player/Sword.gd" type="Script" id=2]
@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3, 0.5 ),
 "transitions": PoolRealArray( 0.44, 1, 1 ),
 "update": 0,
-"values": [ 100.0, -100.0, 100.0 ]
+"values": [ 100.0, -200.0, 100.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:scale")
@@ -28,17 +28,88 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3, 0.5 ),
 "transitions": PoolRealArray( 1.5, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.6 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.8 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 25, -7.5 ), Vector2( 30, -10 ), Vector2( 15, -8 ), Vector2( 0, 0 ) ]
 }
 
-[node name="Sword" type="Node2D"]
+[sub_resource type="Animation" id=3]
+resource_name = "SwingAxe"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 0.4, 1, 1 ),
+"update": 0,
+"values": [ 100.0, -300.0, 100.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1.5, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.3, 1.8 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.5 ),
+"transitions": PoolRealArray( 0.5, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 25, -8 ), Vector2( 30, -10 ), Vector2( 15, -8 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5.27744, 3.44976 )
+
+[node name="Axe" type="Node2D"]
 rotation = 1.74533
 script = ExtResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+rotation = 1.74533
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+scale = Vector2( 1, 1 )
 texture = ExtResource( 1 )
 centered = false
 flip_v = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
 anims/Swing = SubResource( 1 )
+anims/SwingAxe = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2( 4.79944, 10.5168 )
+rotation = -2.93557e-08
+scale = Vector2( 1.01521, 1.0268 )
+shape = SubResource( 2 )
+
+[node name="ThrownAxeContainerPosition" type="Position2D" parent="."]
+
+[node name="ThrownAxeContainer" type="Node2D" parent="ThrownAxeContainerPosition"]
