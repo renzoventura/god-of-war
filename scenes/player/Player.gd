@@ -13,8 +13,8 @@ var recharge_per_timer = 1
 
 var motion = Vector2(0,0)
 var SPEED = 100;
-var MAX_SPEED = 120;
-var DASH_SPEED = 500;
+var MAX_SPEED = 700;
+var DASH_SPEED = 700;
 var is_thrown = false
 var state: int = IDLE
 var isDashEnabled = true;
@@ -52,7 +52,7 @@ func idle():
 	
 func updateSpeed():
 	if(state == DASH):
-		SPEED = 500;
+		SPEED = DASH_SPEED;
 		MAX_SPEED = SPEED;
 	else:
 		if(is_thrown):
@@ -97,7 +97,7 @@ func dashing(delta):
 	playerStateLabel.text = "DASH"
 	move()
 	dash_acc += delta
-	SPEED = 500
+	SPEED = DASH_SPEED
 	if dash_acc >= DASH_TIME:    
 		state = IDLE
 		toggle_hit_box()
