@@ -142,7 +142,7 @@ func toggle_hit_box():
 	pass
 
 func _on_DashTimer_timeout():
-	print("STOP DASH")
+#	print("STOP DASH")
 	state = IDLE
 	isDashEnabled = true;
 
@@ -178,3 +178,10 @@ func damage():
 func _on_HurtTimer_timeout():
 	state = IDLE
 	is_invinsible = false
+
+func _on_HitBox_area_entered(area):
+	if(!is_invinsible):
+		is_invinsible = true
+		damage()
+		hurtTimer.start()
+		state = HURT
