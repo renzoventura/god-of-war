@@ -15,7 +15,6 @@ var health = 10
 var maxhealth = 10
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	healthText.text = generate_health_string()
 
 func generate_health_string():
@@ -78,7 +77,12 @@ func _on_EnemyHitbox_area_entered(area):
 		elif(area.get_parent().is_returning()):
 			hit(thrown_damage)
 		else: 
-			hit(swing_damage)
+			if (area.get_parent().has_mana_damage()):
+				area.get_parent().use_up_mana()
+				hit(swing_damage * 2)
+			else:
+				hit(swing_damage)
+	
 
 func toggle_frozen(value):
 	isFrozen = value;

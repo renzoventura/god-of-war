@@ -11,7 +11,7 @@ onready var animationPlayer = $"SwordArea/AnimationPlayer"
 onready var parent: = get_parent()
 onready var swordCollision = $"SwordArea/CollisionShape2D"
 
-const recharge_mana_amount = 5
+const recharge_mana_amount = 3
 var enemy_scene = preload("res://scenes/enemy/Enemy.tscn")
 
 var can_return: bool = true
@@ -25,6 +25,7 @@ var mana = 0
 
 
 func _ready():
+	is_attacking = false
 	if(first_load):
 		mana = recharge_mana_amount
 	if(get_tree().call_group("GUI", "get_is_charged")):
@@ -46,10 +47,7 @@ func _physics_process(delta):
 			stick()
 
 func attack():
-	if(mana > 0):
 		animationPlayer.play("Swing")
-		mana -= 1
-		get_tree().call_group("GUI", "update_mana", mana)
 #		print(mana)
 
 func idle():
@@ -155,3 +153,10 @@ func is_sticking()->bool:
 
 func init(is_charged, new_mana):
 	mana = new_mana
+
+func has_mana_damage():
+	return mana > 0
+
+func use_up_mana():
+	mana -= 1
+	get_tree().call_group("GUI", "update_mana", mana)
