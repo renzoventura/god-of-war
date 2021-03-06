@@ -6,7 +6,7 @@ enum {IDLE, FLY, RETRIEVE, STICK}
 
 export (float) var acceleration = 2 * 60
 export (float) var fly_speed = 50 * 60
-
+export (bool) var is_attacking = false
 onready var animationPlayer = $"SwordArea/AnimationPlayer"
 onready var parent: = get_parent()
 onready var swordCollision = $"SwordArea/CollisionShape2D"
@@ -22,6 +22,7 @@ var speed:float
 var is_returnable = false
 var body_sticked_on;
 var mana = recharge_mana_amount
+
 
 func _ready():
 	mana = recharge_mana_amount
@@ -49,7 +50,7 @@ func idle():
 	can_return = false
 	if Input.is_action_just_pressed("attack"):
 		attack()
-	if Input.is_action_just_pressed("throw"):
+	elif (Input.is_action_just_pressed("throw") and !is_attacking):
 		flying()
 		swordCollision.disabled = false
 		fly_speed = 20 * 60
