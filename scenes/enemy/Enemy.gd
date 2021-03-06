@@ -29,19 +29,28 @@ func _process(delta):
 
 func idle():
 	state_label.text = "IDLE"
-#	move()
-#	move_and_slide(motion)
+	idle_feature()
+
+func idle_feature():
+	move()
+	move_and_slide(motion)
 	pass
 
 func frozen():
 	state_label.text = "FROZEN"
-	pass 
+	frozen_feature() 
+	
+func frozen_feature():
+	pass
 	
 func move():
 	motion.x = 10
 
 func attack():
 	state_label.text = "ATTACK"
+	attack_feature()
+	
+func attack_feature():
 	pass
 
 func hit(damage):
