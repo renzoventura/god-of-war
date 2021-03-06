@@ -41,7 +41,7 @@ func attack():
 	if(mana > 0):
 		animationPlayer.play("Swing")
 		mana -= 1
-		print(mana)
+#		print(mana)
 
 	
 func idle():
