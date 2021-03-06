@@ -148,6 +148,9 @@ func is_flying()->bool:
 func is_returning()->bool:
 	return state == RETRIEVE
 	
+func is_idle()->bool:
+	return state == IDLE
+	
 func is_sticking()->bool:
 	return state == STICK
 

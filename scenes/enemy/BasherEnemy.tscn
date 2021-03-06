@@ -32,11 +32,18 @@ shape = SubResource( 1 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 anims/BashAttack = SubResource( 2 )
 
-[node name="ChargeTimer" type="Timer" parent="." index="9"]
+[node name="CoolDownTimer" type="Timer" parent="." index="9"]
+wait_time = 3.0
+one_shot = true
 
-[node name="BashTimer" type="Timer" parent="." index="10"]
+[node name="ChargeTimer" type="Timer" parent="." index="10"]
+one_shot = true
+
+[node name="BashTimer" type="Timer" parent="." index="11"]
 wait_time = 2.0
+one_shot = true
 [connection signal="body_entered" from="AttackRange/AttackRange2" to="." method="_on_AttackRange2_body_entered"]
 [connection signal="body_exited" from="AttackRange/AttackRange2" to="." method="_on_AttackRange2_body_exited"]
+[connection signal="timeout" from="CoolDownTimer" to="." method="_on_CoolDownTimer_timeout"]
 [connection signal="timeout" from="ChargeTimer" to="." method="_on_ChargeTimer_timeout"]
 [connection signal="timeout" from="BashTimer" to="." method="_on_BashTimer_timeout"]

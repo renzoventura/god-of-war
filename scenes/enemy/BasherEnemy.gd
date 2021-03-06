@@ -6,17 +6,24 @@ export var SPEED:int = 30
 onready var animationPlayer = $"AnimationPlayer"
 onready var bashTimer = $"BashTimer"
 onready var chargeTimer = $"ChargeTimer"
+onready var coolDownTimer = $"CoolDownTimer"
 
 var is_bashing:bool = false
 var is_done_charging: bool = false
 var last_player_position; 
+var resting = false
 
 func attack_feature():
-	if(!is_bashing):
-		SPEED = 30
-		chase_player()
+	if(!resting):
+
+		if(!is_bashing):
+			SPEED = 30
+			chase_player()
+		else:
+			bash_attack()
 	else:
-		bash_attack()
+#		print("RESTING")
+		pass
 
 func chase_player():
 	player = get_tree().get_root().find_node("Player", true, false)
@@ -28,11 +35,11 @@ func bash_attack():
 	var player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = last_player_position
 	if(is_done_charging):
-		print("DASH")
+#		print("DASH")
 		move_and_slide(SPEED * player_direction.normalized())
 	else:
-		print("CHARGING")
-	
+#		print("CHARGING")
+		pass
 
 func get_target()->Vector2:
 	var player = get_tree().get_root().find_node("Player", true, false)
@@ -54,6 +61,12 @@ func _on_AttackRange2_body_exited(body):
 func _on_BashTimer_timeout():
 	is_bashing = false
 	is_done_charging = false
+	resting = true
+	coolDownTimer.start()
 
 func _on_ChargeTimer_timeout():
 	is_done_charging = true
+
+
+func _on_CoolDownTimer_timeout():
+	resting = false
