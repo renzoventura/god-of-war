@@ -12,6 +12,7 @@ onready var parent: = get_parent()
 onready var swordCollision = $"SwordArea/CollisionShape2D"
 
 const recharge_mana_amount = 5
+var enemy_scene = preload("res://scenes/enemy/Enemy.tscn")
 
 var can_return: bool = true
 var state: int = IDLE
@@ -119,7 +120,9 @@ func _on_Area2D_body_entered(body):
 	if(body.name == "Player" and state == RETRIEVE and is_returnable):
 		body.renew_axe()
 		is_returnable = false
-	elif (body.name == "Enemy" and state == FLY):
+	#BIG WORK AROUND FOR INHERITED CLASSES
+	elif (body.get_parent().name == "Enemies" and state == FLY):
+#	elif (body) and state == FLY):
 		body_sticked_on = body
 		body_sticked_on.toggle_frozen()
 		state = STICK

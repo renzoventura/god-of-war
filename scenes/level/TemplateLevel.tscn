@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/enemy/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/level/TemplateLevel.gd" type="Script" id=3]
+[ext_resource path="res://scenes/enemy/BossEnemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemy/SwarmEnemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/enemy/RangeEnemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/enemy/BasherEnemy.tscn" type="PackedScene" id=7]
 
 [node name="TemplateLevel" type="Node2D"]
 script = ExtResource( 3 )
@@ -14,5 +17,16 @@ position = Vector2( -0.35849, 0.71698 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
 
-[node name="Enemy" parent="." instance=ExtResource( 2 )]
-position = Vector2( 38.4196, -33.8093 )
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="RangeEnemy" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( -21.1261, 55.456 )
+
+[node name="BasherEnemy" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( -3.52103, -57.2165 )
+
+[node name="SwarmEnemy" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( -107.391, -29.9286 )
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 91.9865, 14.5242 )
