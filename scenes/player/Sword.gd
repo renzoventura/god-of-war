@@ -25,6 +25,8 @@ var mana = 0
 
 
 func _ready():
+	
+	get_tree().call_group("Enemy", "toggle_frozen", false)
 	is_attacking = false
 	if(first_load):
 		mana = recharge_mana_amount
@@ -71,6 +73,7 @@ func retrieve_position():
 	if(Input.is_action_just_pressed("throw") and is_returnable):
 		if(body_sticked_on != null):
 			body_sticked_on.toggle_frozen(false)
+			get_tree().call_group("Enemy", "toggle_frozen", false)
 			get_tree().call_group("Player", "toggle_is_charged", true, recharge_mana_amount)
 		else:
 			get_tree().call_group("Player", "toggle_is_charged", false, mana)

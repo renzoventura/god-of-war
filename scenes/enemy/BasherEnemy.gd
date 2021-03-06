@@ -31,6 +31,7 @@ func chase_player():
 	player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = player.position - self.position
 	move_and_slide(SPEED * player_direction.normalized())
+	
 
 func bash_attack():
 	SPEED = BASH_SPEED
