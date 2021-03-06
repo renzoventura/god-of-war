@@ -129,7 +129,8 @@ func renew_axe():
 		enable_axe_movement()
 
 func toggle_hit_box():
-	player_hit_box.disabled = !player_hit_box.disabled
+#	player_hit_box.disabled = !player_hit_box.disabled
+	pass
 
 func _on_DashTimer_timeout():
 	isDashEnabled = true;

@@ -1,11 +1,53 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/enemy/basher_enemy.png" type="Texture" id=2]
 [ext_resource path="res://scenes/enemy/BasherEnemy.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 151.132
+
+[sub_resource type="Animation" id=2]
+resource_name = "BashAttack"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:SPEED")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.9, 1, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 0, 500, 500, 0, 500 ]
+}
 
 [node name="BasherEnemy" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+
+[node name="DectectionZone" parent="AI" index="0"]
+scale = Vector2( 3, 3 )
+
+[node name="AttackRange" type="Node2D" parent="." index="7"]
+
+[node name="AttackRange2" type="Area2D" parent="AttackRange" index="0"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange/AttackRange2" index="0"]
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
+anims/BashAttack = SubResource( 2 )
+
+[node name="ChargeTimer" type="Timer" parent="." index="9"]
+
+[node name="BashTimer" type="Timer" parent="." index="10"]
+wait_time = 2.0
+[connection signal="body_entered" from="AttackRange/AttackRange2" to="." method="_on_AttackRange2_body_entered"]
+[connection signal="body_exited" from="AttackRange/AttackRange2" to="." method="_on_AttackRange2_body_exited"]
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_ChargeTimer_timeout"]
+[connection signal="timeout" from="BashTimer" to="." method="_on_BashTimer_timeout"]
