@@ -29,6 +29,7 @@ rotation = -6.28319
 [node name="Node2D" type="Node2D" parent="Center/offset"]
 
 [node name="Sword" parent="Center/offset/Node2D" instance=ExtResource( 3 )]
+position = Vector2( 1, -0.999995 )
 rotation = -1.49012e-08
 first_load = true
 

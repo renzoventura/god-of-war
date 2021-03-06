@@ -9,3 +9,16 @@ script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+
+[node name="DectectionZone" parent="AI" index="0"]
+scale = Vector2( 2, 2 )
+
+[node name="CollisionShape2D" parent="AI/DectectionZone" index="0"]
+visible = true
+
+[node name="Bullets" type="Node2D" parent="." index="7"]
+
+[node name="BulletSpawner" type="Timer" parent="." index="8"]
+wait_time = 3.0
+one_shot = true
+[connection signal="timeout" from="BulletSpawner" to="." method="_on_BulletSpawner_timeout"]

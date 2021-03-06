@@ -24,7 +24,7 @@ func update_lives(lives):
 	for i in range(lives):
 		var lifeInstance = heart_pre_load.instance();
 		lifeInstance.rect_scale = Vector2(5,5)
-		print(lifeInstance.rect_scale)
+#		print(lifeInstance.rect_scale)
 		livesContainer.add_child(lifeInstance)
 
 func update_mana(mana):
@@ -35,7 +35,7 @@ func update_mana(mana):
 		mana_container.add_child(manaInstance)
 	
 func update_axe(axe):
-	print(axe)
+#	print(axe)
 	if(axe):
 		var axeInstance = axe_preload.instance();
 		axeContainer.add_child(axeInstance)

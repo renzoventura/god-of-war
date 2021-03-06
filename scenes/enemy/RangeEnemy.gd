@@ -1,16 +1,40 @@
 extends "res://scenes/enemy/Enemy.gd"
 
+var bullet = preload("res://scenes/enemy/RangeBullet.tscn")
+onready var bullet_container = $"Bullets"
+onready var bullet_timer = $"BulletSpawner"
+var canAttack : bool = false
+var bullet_cooldown : bool = false
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	bullet_timer.start()
+	health = 2
+	maxhealth = 2
 
+func idle_feature():
+	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func frozen_feature():
+	pass
+	
+func attack_feature():
+	if(canAttack):
+		fireBullet()
+		canAttack = false
+
+func attack_mode_on():
+	if(!canAttack):
+		bullet_timer.start()
+
+func fireBullet():
+	var player = get_tree().get_root().find_node("Player", true, false)
+	var player_direction = (player.global_position)
+	var bullet_instance = bullet.instance()
+	var dir = (player.global_position - global_position).normalized()
+	bullet_instance.direction = dir
+	bullet_container.add_child(bullet_instance)
+	bullet_timer.start()
+
+func _on_BulletSpawner_timeout():
+	canAttack = true
+	bullet_cooldown = true

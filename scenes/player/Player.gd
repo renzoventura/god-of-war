@@ -143,7 +143,7 @@ func update_stamina_gui():
 	get_tree().call_group("GUI", "update_stamina", stamina)
 
 func toggle_is_charged(value, mana):
-	print("is_charged: " + str(value) + ". mana: " + str(mana))
+#	print("is_charged: " + str(value) + ". mana: " + str(mana))
 	if(mana != null):
 		axe_mana = mana
 	is_charged = value;

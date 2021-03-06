@@ -28,7 +28,7 @@ func _ready():
 	if(first_load):
 		mana = recharge_mana_amount
 	if(get_tree().call_group("GUI", "get_is_charged")):
-		print("RECHARGING MANA")
+#		print("RECHARGING MANA")
 		mana = recharge_mana_amount
 	get_tree().call_group("GUI", "update_mana", mana)
 	get_tree().call_group("GUI", "update_axe", true)

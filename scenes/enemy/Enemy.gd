@@ -15,6 +15,7 @@ var health = 10
 var maxhealth = 10
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	healthText.text = generate_health_string()
 
 func generate_health_string():
@@ -91,6 +92,10 @@ func _on_DectectionZone_body_entered(body):
 	if(body.name == "Player" and state != FROZEN):
 #		print("Detect Player")
 		state = ATTACK
+		attack_mode_on()
+		
+func attack_mode_on():
+	pass
 
 func _on_DectectionZone_body_exited(body):
 	if(body.name == "Player" and state != FROZEN ):
