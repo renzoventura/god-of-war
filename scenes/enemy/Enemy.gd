@@ -6,17 +6,24 @@ const thrown_damage = 1
 
 onready var state_label = $State
 onready var staggerTimer = $StaggerTime
+onready var healthText = $HealthText
 
 var motion = Vector2(0,0)
 var isFrozen = false;
 var state: int = IDLE
 var health = 10
-
+var maxhealth = 10
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	healthText.text = generate_health_string()
 
+func generate_health_string():
+	var text = str(health) + "/" + str(maxhealth)
+	return text
+	
+	
 func _process(delta):
+	healthText.text = generate_health_string()
 	match state:
 		IDLE:
 			idle()
@@ -32,8 +39,8 @@ func idle():
 	idle_feature()
 
 func idle_feature():
-	move()
-	move_and_slide(motion)
+#	move()
+#	move_and_slide(motion)
 	pass
 
 func frozen():

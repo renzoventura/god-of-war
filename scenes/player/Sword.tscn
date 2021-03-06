@@ -6,6 +6,7 @@
 [sub_resource type="Animation" id=1]
 resource_name = "Swing"
 length = 0.5
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
@@ -49,10 +50,10 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1, 0.101, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.001, 0.05, 0.1, 0.101, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ true, false, false, false, false, false, true ]
+"values": [ false, true, false, false, false, false, false, false, true ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("..:is_attacking")
@@ -128,7 +129,7 @@ anims/Swing = SubResource( 1 )
 anims/SwingAxe = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordArea"]
-position = Vector2( 8.32901, 10.1176 )
+position = Vector2( 8, 10 )
 rotation = -2.93557e-08
 scale = Vector2( 1.01521, 1.0268 )
 shape = SubResource( 3 )

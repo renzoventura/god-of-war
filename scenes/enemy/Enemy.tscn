@@ -49,6 +49,14 @@ __meta__ = {
 
 [node name="StaggerTime" type="Timer" parent="."]
 one_shot = true
+
+[node name="HealthText" type="Label" parent="."]
+margin_top = 20.0
+margin_right = 40.0
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="area_entered" from="EnemyHitbox" to="." method="_on_EnemyHitbox_area_entered"]
 [connection signal="body_entered" from="AI/DectectionZone" to="." method="_on_DectectionZone_body_entered"]
 [connection signal="body_exited" from="AI/DectectionZone" to="." method="_on_DectectionZone_body_exited"]
