@@ -118,6 +118,7 @@ func _on_Timer_timeout():
 	can_return = true
 
 func _on_Area2D_body_entered(body):
+	print(body.name)
 	if(body.name == "Player" and state == RETRIEVE and is_returnable):
 		body.renew_axe()
 		is_returnable = false
@@ -127,6 +128,8 @@ func _on_Area2D_body_entered(body):
 		body_sticked_on = body
 		body_sticked_on.toggle_frozen()
 		state = STICK
+	elif (body.name == "TileMap" and state != RETRIEVE):
+		force_retrieve()
 
 func _on_ReturnTimer_timeout():
 	is_returnable = true
