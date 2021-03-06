@@ -26,14 +26,14 @@ __meta__ = {
 }
 
 [node name="Control2" type="Control" parent="Control/VBoxContainer"]
-margin_right = 2000.0
+margin_right = 1014.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LivesAndAxeContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
 margin_top = 4.0
-margin_right = 2000.0
+margin_right = 1014.0
 margin_bottom = 4.0
 custom_constants/separation = 0
 __meta__ = {
@@ -47,14 +47,13 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 
 [node name="AxeContainer" type="HBoxContainer" parent="Control/VBoxContainer/LivesAndAxeContainer"]
-margin_left = 2000.0
-margin_right = 2000.0
+margin_left = 1014.0
+margin_right = 1014.0
 
 [node name="StaminaMeter" type="TextureProgress" parent="Control/VBoxContainer"]
 margin_top = 8.0
-margin_right = 300.0
+margin_right = 1014.0
 margin_bottom = 28.0
-max_value = 100.0
 texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 2 )
 __meta__ = {
@@ -63,5 +62,5 @@ __meta__ = {
 
 [node name="ManaContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
 margin_top = 32.0
-margin_right = 2000.0
+margin_right = 1014.0
 margin_bottom = 32.0

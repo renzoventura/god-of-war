@@ -11,4 +11,12 @@ func _process(delta):
 
 
 func _on_Area2D_area_entered(area):
-	pass # Replace with function body.
+	if(area.name == "Player" || area.name == "TileMap"):
+		print("BULLET HIT PLAYER/TILE AREA or ")
+		queue_free()
+
+
+func _on_Area2D_body_entered(body):
+	if(body.name == "Player" || body.name == "TileMap"):
+		print("BULLET HIT PLAYER/TILE BODY")
+		queue_free()

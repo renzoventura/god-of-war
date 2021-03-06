@@ -23,6 +23,7 @@ texture = ExtResource( 2 )
 scale = Vector2( 3, 3 )
 
 [node name="AttackRange" type="Node2D" parent="." index="7"]
+visible = false
 
 [node name="AttackRange2" type="Area2D" parent="AttackRange" index="0"]
 

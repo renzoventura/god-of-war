@@ -3,20 +3,21 @@ extends KinematicBody2D
 enum {ATTACK, IDLE, DASH, HURT}
 
 const FRICTION = 0.1
-const DASH_COST = 30
+const DASH_COST : int = 30
 
-var DASH_TIME = 0.1
-var dash_acc = 0 
-var max_stamina = 100
-var stamina = 100
-var recharge_per_timer = 1
+var DASH_TIME= 0.1
+var dash_acc : int = 0 
+var max_stamina  : int= 100
+var stamina : int = 100
+var recharge_per_timer : int = 1
+var lives  : int= 5
 
 var motion = Vector2(0,0)
-var SPEED = 100;
-var MAX_SPEED = 700;
-var DASH_SPEED = 700;
+var SPEED  : int = 100;
+var MAX_SPEED  : int = 700;
+var DASH_SPEED : int = 700;
 var is_thrown = false
-var state: int = IDLE
+var state : int = IDLE
 var isDashEnabled = true;
 
 onready var sword_position = $"Center"
@@ -25,12 +26,15 @@ onready var sword = $"Center/offset/Node2D/Sword"
 onready var player_hit_box = $"CollisionShape2D"
 onready var dashTimer = $"DashTimer"
 onready var staminaChargerTimer = $"StaminaChargerTimer"
+onready var hurtTimer = $"HurtTimer"
 onready var playerStateLabel = $"PlayerState"
 
-var is_charged = false
-var axe_mana = 0
+var is_charged : bool = false
+var axe_mana : int = 0
+var is_invinsible : bool = false
 
 func _ready():
+	update_lives_gui()
 	staminaChargerTimer.start()
 
 func _process(delta):
@@ -41,8 +45,14 @@ func _process(delta):
 		DASH:
 			dashing(delta)
 		HURT:
-			pass
+			hurting()
 
+func hurting():
+	playerStateLabel.text = "HURT"
+	move()
+	move_sword()
+	move_and_slide(motion)
+	
 func idle():
 	playerStateLabel.text = "IDLE"
 	move()
@@ -129,25 +139,42 @@ func renew_axe():
 		enable_axe_movement()
 
 func toggle_hit_box():
-#	player_hit_box.disabled = !player_hit_box.disabled
 	pass
 
 func _on_DashTimer_timeout():
+	print("STOP DASH")
+	state = IDLE
 	isDashEnabled = true;
 
 func _on_StaminaCharger_timeout():
-#	print("recharging")
 	if(max_stamina > stamina):
 		stamina += recharge_per_timer
 
 func update_stamina_gui():
 	get_tree().call_group("GUI", "update_stamina", stamina)
-
+	
+func update_lives_gui():
+	get_tree().call_group("GUI", "update_lives", lives)
+	
 func toggle_is_charged(value, mana):
-#	print("is_charged: " + str(value) + ". mana: " + str(mana))
 	if(mana != null):
 		axe_mana = mana
 	is_charged = value;
 
 func get_is_charged()->bool:
 	return is_charged
+
+func _on_HitBox_body_entered(body):
+	if(!is_invinsible):
+		is_invinsible = true
+		damage()
+		hurtTimer.start()
+		state = HURT
+
+func damage():
+	lives = lives - 1
+	update_lives_gui()
+	
+func _on_HurtTimer_timeout():
+	state = IDLE
+	is_invinsible = false

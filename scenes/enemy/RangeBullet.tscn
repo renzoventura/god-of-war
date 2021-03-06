@@ -10,9 +10,11 @@ radius = 4.31227
 radius = 3.95899
 
 [node name="RangeBullet" type="RigidBody2D"]
+collision_layer = 8
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
 texture = ExtResource( 1 )
@@ -23,3 +25,4 @@ shape = SubResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

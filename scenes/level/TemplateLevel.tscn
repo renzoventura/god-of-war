@@ -13,15 +13,15 @@
 script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 116.007, 201.019 )
+position = Vector2( -140.836, 171.545 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="RangeEnemy" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( 404.593, 194.252 )
+position = Vector2( -411.199, 204.778 )
 
 [node name="BasherEnemy" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( -3.52103, -57.2165 )
+position = Vector2( -410.891, -223.533 )
 
 [node name="SwarmEnemy" parent="Enemies" instance=ExtResource( 5 )]
 position = Vector2( -107.391, -29.9286 )
