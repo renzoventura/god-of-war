@@ -158,5 +158,6 @@ func has_mana_damage():
 	return mana > 0
 
 func use_up_mana():
-	mana -= 1
-	get_tree().call_group("GUI", "update_mana", mana)
+	if(state != STICK):
+		mana -= 1
+		get_tree().call_group("GUI", "update_mana", mana)

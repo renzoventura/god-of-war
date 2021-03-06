@@ -7,6 +7,7 @@ const thrown_damage = 1
 onready var state_label = $State
 onready var staggerTimer = $StaggerTime
 onready var healthText = $HealthText
+onready var detectionZone = $"AI/DectectionZone"
 
 var motion = Vector2(0,0)
 var isFrozen = false;
@@ -39,8 +40,9 @@ func idle():
 	idle_feature()
 
 func idle_feature():
-#	move()
-#	move_and_slide(motion)
+	var player_node = get_tree().get_root().find_node("Player", true, false)
+	if(detectionZone.overlaps_body(player_node) || detectionZone.overlaps_area(player_node)):
+		state = ATTACK
 	pass
 
 func frozen():

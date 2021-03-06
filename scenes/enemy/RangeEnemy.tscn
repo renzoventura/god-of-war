@@ -13,9 +13,6 @@ texture = ExtResource( 2 )
 [node name="DectectionZone" parent="AI" index="0"]
 scale = Vector2( 2, 2 )
 
-[node name="CollisionShape2D" parent="AI/DectectionZone" index="0"]
-visible = true
-
 [node name="Bullets" type="Node2D" parent="." index="7"]
 
 [node name="BulletSpawner" type="Timer" parent="." index="8"]
