@@ -1,12 +1,16 @@
 extends KinematicBody2D
 
-enum {IDLE, FROZEN, ATTACK}
+enum {IDLE, FROZEN, ATTACK, HURT}
 const swing_damage = 3
 const thrown_damage = 1
+
+onready var state_label = $State
+onready var staggerTimer = $StaggerTime
+
 var motion = Vector2(0,0)
 var isFrozen = false;
 var state: int = IDLE
-var health = 5
+var health = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,30 +24,36 @@ func _process(delta):
 			frozen()
 		ATTACK:
 			attack()
+		HURT:
+			hurt()
 
 func idle():
-	move()
-	move_and_slide(motion)
+	state_label.text = "IDLE"
+#	move()
+#	move_and_slide(motion)
+	pass
 
 func frozen():
+	state_label.text = "FROZEN"
 	pass 
 	
 func move():
 	motion.x = 10
 
 func attack():
-#	print("Attacking!")
+	state_label.text = "ATTACK"
 	pass
 
 func hit(damage):
-	print("DAMAGE: " + str(damage))
+	state = HURT
+	staggerTimer.start()
 	health -= damage
 	if(health <= 0):
 		queue_free()
 
 
 func _on_EnemyHitbox_area_entered(area):
-	if (area.name == "SwordArea"):
+	if (area.name == "SwordArea" and state != HURT):
 		if(area.get_parent().is_flying()):
 			hit(thrown_damage)
 		else: 
@@ -58,11 +68,18 @@ func toggle_frozen():
 		state = IDLE
 
 func _on_DectectionZone_body_entered(body):
-	if(body.name == "Player"):
-		print("Detect Player")
+	if(body.name == "Player" and state != FROZEN):
+#		print("Detect Player")
 		state = ATTACK
 
 func _on_DectectionZone_body_exited(body):
-	if(body.name == "Player"):
-		print("Detect LEAVING Player")
+	if(body.name == "Player" and state != FROZEN ):
+#		print("Detect LEAVING Player")
 		state = IDLE
+
+func hurt():
+	state_label.text = "HURT"
+#	print("State is hurt")
+
+func _on_StaggerTime_timeout():
+	state = IDLE

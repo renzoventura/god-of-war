@@ -21,6 +21,7 @@ onready var sword = $"Center/offset/Node2D/Sword"
 onready var player_hit_box = $"CollisionShape2D"
 onready var dashTimer = $"DashTimer"
 onready var staminaChargerTimer = $"StaminaChargerTimer"
+onready var playerStateLabel = $"PlayerState"
 
 var stamina = 5
 
@@ -31,12 +32,14 @@ func _process(delta):
 	match state:
 		IDLE:
 			idle()
+			
 		DASH:
 			dashing(delta)
 		HURT:
 			pass
 
 func idle():
+	playerStateLabel.text = "IDLE"
 	move()
 	move_sword()
 	dash()
@@ -86,6 +89,7 @@ func has_stamina_for(cost) -> bool:
 		return false
 		
 func dashing(delta):
+	playerStateLabel.text = "DASH"
 	move()
 	dash_acc += delta
 	SPEED = 500

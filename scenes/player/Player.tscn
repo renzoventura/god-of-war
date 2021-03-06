@@ -33,5 +33,13 @@ rotation = -1.49012e-08
 [node name="DashTimer" type="Timer" parent="."]
 
 [node name="StaminaChargerTimer" type="Timer" parent="."]
+
+[node name="PlayerState" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "STATE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="StaminaChargerTimer" to="." method="_on_StaminaCharger_timeout"]

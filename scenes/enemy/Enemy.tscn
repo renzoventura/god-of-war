@@ -36,6 +36,18 @@ shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AI/DectectionZone"]
 shape = SubResource( 3 )
+
+[node name="State" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "STATE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaggerTime" type="Timer" parent="."]
+one_shot = true
 [connection signal="area_entered" from="EnemyHitbox" to="." method="_on_EnemyHitbox_area_entered"]
 [connection signal="body_entered" from="AI/DectectionZone" to="." method="_on_DectectionZone_body_entered"]
 [connection signal="body_exited" from="AI/DectectionZone" to="." method="_on_DectectionZone_body_exited"]
+[connection signal="timeout" from="StaggerTime" to="." method="_on_StaggerTime_timeout"]
