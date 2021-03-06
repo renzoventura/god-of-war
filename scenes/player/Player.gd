@@ -3,10 +3,14 @@ extends KinematicBody2D
 enum {ATTACK, IDLE, DASH, HURT}
 
 const FRICTION = 0.1
-const DASH_COST = 2
+const DASH_COST = 30
 
 var DASH_TIME = 0.1
 var dash_acc = 0 
+var max_stamina = 100
+var stamina = 100
+var recharge_per_timer = 1
+
 var motion = Vector2(0,0)
 var SPEED = 100;
 var MAX_SPEED = 120;
@@ -23,16 +27,16 @@ onready var dashTimer = $"DashTimer"
 onready var staminaChargerTimer = $"StaminaChargerTimer"
 onready var playerStateLabel = $"PlayerState"
 
-var stamina = 5
+
 
 func _ready():
 	staminaChargerTimer.start()
 
 func _process(delta):
+	update_stamina_gui()
 	match state:
 		IDLE:
 			idle()
-			
 		DASH:
 			dashing(delta)
 		HURT:
@@ -129,4 +133,8 @@ func _on_DashTimer_timeout():
 
 func _on_StaminaCharger_timeout():
 #	print("recharging")
-	stamina += 1
+	if(max_stamina > stamina):
+		stamina += recharge_per_timer
+
+func update_stamina_gui():
+	get_tree().call_group("GUI", "update_stamina", stamina)

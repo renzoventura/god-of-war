@@ -61,9 +61,10 @@ func attack_feature():
 	pass
 
 func hit(damage):
-	state = HURT
-	staggerTimer.start()
-	health -= damage
+	if(state != FROZEN):
+		state = HURT
+		staggerTimer.start()
+		health -= damage
 	if(health <= 0):
 		queue_free()
 
@@ -72,15 +73,18 @@ func _on_EnemyHitbox_area_entered(area):
 	if (area.name == "SwordArea" and state != HURT):
 		if(area.get_parent().is_flying()):
 			hit(thrown_damage)
+			toggle_frozen(true)
+		elif(area.get_parent().is_returning()):
+			hit(thrown_damage)
 		else: 
 			hit(swing_damage)
 
-func toggle_frozen():
-#	print("TOGGLED")
-	isFrozen = !isFrozen;
+func toggle_frozen(value):
+	isFrozen = value;
 	if(isFrozen):
 		state = FROZEN
 	else:
+		staggerTimer.start()
 		state = IDLE
 
 func _on_DectectionZone_body_entered(body):
@@ -98,4 +102,5 @@ func hurt():
 #	print("State is hurt")
 
 func _on_StaggerTime_timeout():
-	state = IDLE
+	if(state != FROZEN):
+		state = IDLE

@@ -26,6 +26,8 @@ var mana = recharge_mana_amount
 
 func _ready():
 	mana = recharge_mana_amount
+	get_tree().call_group("GUI", "update_mana", mana)
+	get_tree().call_group("GUI", "update_axe", true)
 	idle_position()
 
 func _physics_process(delta):
@@ -43,6 +45,7 @@ func attack():
 	if(mana > 0):
 		animationPlayer.play("Swing")
 		mana -= 1
+		get_tree().call_group("GUI", "update_mana", mana)
 #		print(mana)
 
 	
@@ -52,6 +55,7 @@ func idle():
 		attack()
 	elif (Input.is_action_just_pressed("throw") and !is_attacking):
 		flying()
+		get_tree().call_group("GUI", "update_axe", false)
 		swordCollision.disabled = false
 		fly_speed = 20 * 60
 		if(!is_returnable):
@@ -65,7 +69,7 @@ func spin_axe(delta:float):
 func retrieve_position():
 	if(Input.is_action_just_pressed("throw") and is_returnable):
 		if(body_sticked_on != null):
-			body_sticked_on.toggle_frozen()
+			body_sticked_on.toggle_frozen(false)
 		body_sticked_on = null
 		state = RETRIEVE
 		fly_speed = 4 * 60
@@ -118,7 +122,7 @@ func _on_Timer_timeout():
 	can_return = true
 
 func _on_Area2D_body_entered(body):
-	print(body.name)
+#	print(body.name)
 	if(body.name == "Player" and state == RETRIEVE and is_returnable):
 		body.renew_axe()
 		is_returnable = false
@@ -126,9 +130,8 @@ func _on_Area2D_body_entered(body):
 	elif (body.get_parent().name == "Enemies" and state == FLY):
 #	elif (body) and state == FLY):
 		body_sticked_on = body
-		body_sticked_on.toggle_frozen()
 		state = STICK
-	elif (body.name == "TileMap" and state != RETRIEVE):
+	elif (body.name == "TileMap" and state != RETRIEVE and state != IDLE):
 		force_retrieve()
 
 func _on_ReturnTimer_timeout():
@@ -136,3 +139,9 @@ func _on_ReturnTimer_timeout():
 
 func is_flying()->bool:
 	return state == FLY
+
+func is_returning()->bool:
+	return state == RETRIEVE
+	
+func is_sticking()->bool:
+	return state == STICK
