@@ -27,7 +27,8 @@ onready var dashTimer = $"DashTimer"
 onready var staminaChargerTimer = $"StaminaChargerTimer"
 onready var playerStateLabel = $"PlayerState"
 
-
+var is_charged = false
+var axe_mana = 0
 
 func _ready():
 	staminaChargerTimer.start()
@@ -122,6 +123,8 @@ func renew_axe():
 			n.queue_free()
 		var preloadAxe = preload("res://scenes/player/Sword.tscn")
 		var axeInstance = preloadAxe.instance();
+		axeInstance.init(is_charged, axe_mana)
+		is_charged = false
 		sword_position_container.call_deferred("add_child",axeInstance)
 		enable_axe_movement()
 
@@ -138,3 +141,12 @@ func _on_StaminaCharger_timeout():
 
 func update_stamina_gui():
 	get_tree().call_group("GUI", "update_stamina", stamina)
+
+func toggle_is_charged(value, mana):
+	print("is_charged: " + str(value) + ". mana: " + str(mana))
+	if(mana != null):
+		axe_mana = mana
+	is_charged = value;
+
+func get_is_charged()->bool:
+	return is_charged

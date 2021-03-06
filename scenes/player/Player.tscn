@@ -30,8 +30,10 @@ rotation = -6.28319
 
 [node name="Sword" parent="Center/offset/Node2D" instance=ExtResource( 3 )]
 rotation = -1.49012e-08
+first_load = true
 
 [node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.3
 
 [node name="StaminaChargerTimer" type="Timer" parent="."]
 wait_time = 0.08

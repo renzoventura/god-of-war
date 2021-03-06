@@ -2,7 +2,7 @@ extends Node2D
 
 enum {IDLE, FLY, RETRIEVE, STICK}
 
-
+export var first_load = false
 
 export (float) var acceleration = 2 * 60
 export (float) var fly_speed = 50 * 60
@@ -21,11 +21,15 @@ var pos: = Vector2.ZERO
 var speed:float
 var is_returnable = false
 var body_sticked_on;
-var mana = recharge_mana_amount
+var mana = 0
 
 
 func _ready():
-	mana = recharge_mana_amount
+	if(first_load):
+		mana = recharge_mana_amount
+	if(get_tree().call_group("GUI", "get_is_charged")):
+		print("RECHARGING MANA")
+		mana = recharge_mana_amount
 	get_tree().call_group("GUI", "update_mana", mana)
 	get_tree().call_group("GUI", "update_axe", true)
 	idle_position()
@@ -48,7 +52,6 @@ func attack():
 		get_tree().call_group("GUI", "update_mana", mana)
 #		print(mana)
 
-	
 func idle():
 	can_return = false
 	if Input.is_action_just_pressed("attack"):
@@ -70,11 +73,15 @@ func retrieve_position():
 	if(Input.is_action_just_pressed("throw") and is_returnable):
 		if(body_sticked_on != null):
 			body_sticked_on.toggle_frozen(false)
+			get_tree().call_group("Player", "toggle_is_charged", true, recharge_mana_amount)
+		else:
+			get_tree().call_group("Player", "toggle_is_charged", false, mana)
 		body_sticked_on = null
 		state = RETRIEVE
 		fly_speed = 4 * 60
 		
 func force_retrieve():
+	get_tree().call_group("Player", "toggle_is_charged", false, mana)
 	state = RETRIEVE
 	fly_speed = 4 * 60
 
@@ -145,3 +152,6 @@ func is_returning()->bool:
 	
 func is_sticking()->bool:
 	return state == STICK
+
+func init(is_charged, new_mana):
+	mana = new_mana
