@@ -10,8 +10,8 @@ var dash_acc : int = 0
 var max_stamina  : int= 100
 var stamina : int = 100
 var recharge_per_timer : int = 1
-var lives  : int= 5
-
+var lives  : int= 6
+var max_lives : int = 6
 var motion = Vector2(0,0)
 var SPEED  : int = 100;
 var MAX_SPEED  : int = 700;
@@ -154,7 +154,7 @@ func update_stamina_gui():
 	get_tree().call_group("GUI", "update_stamina", stamina)
 	
 func update_lives_gui():
-	get_tree().call_group("GUI", "update_lives", lives)
+	get_tree().call_group("GUI", "update_lives", lives, max_lives)
 	
 func toggle_is_charged(value, mana):
 	if(mana != null):
@@ -172,8 +172,9 @@ func _on_HitBox_body_entered(body):
 		state = HURT
 
 func damage():
-	lives = lives - 1
-	update_lives_gui()
+	if(lives >= 1):
+		lives = lives - 1
+		update_lives_gui()
 	
 func _on_HurtTimer_timeout():
 	state = IDLE
