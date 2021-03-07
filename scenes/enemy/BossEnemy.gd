@@ -7,13 +7,16 @@ onready var orbsRandomizer = $"OrbsRandomizer"
 var spin_value = 0
 
 var orb_spin_multiplier = 2
-var orb_position_speed = 0.7
-var value = 0.2
+var orb_position_speed = 0.4
+var value = orb_position_speed
 var moved_value = 0
-var max_moved_value = 50
+var max_moved_value = 30
 var max_negative_moved_value = -30
 
 var orb_spin_multiplier_list = [1.5, 2, 2.5]
+var orb_position_speed_list = [0.4, 0.7, 1]
+var max_moved_value_list = [30, 50, 80] 
+var max_negative_moved_value_list = [-30, 0] 
 
 func _ready():
 	orbsRandomizer.start()
@@ -86,4 +89,7 @@ func spawn_giants():
 
 func _on_OrbsRandomizer_timeout():
 	orb_spin_multiplier = orb_spin_multiplier_list[randi() % orb_spin_multiplier_list.size()]
+	orb_position_speed = orb_position_speed_list[randi() % orb_position_speed_list.size()]
+	max_moved_value = max_moved_value_list[randi() % max_moved_value_list.size()]
+#	max_negative_moved_value = max_negative_moved_value_list[randi() % max_negative_moved_value_list.size()]
 	pass # Replace with function body.
