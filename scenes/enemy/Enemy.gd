@@ -14,8 +14,12 @@ var isFrozen = false;
 var state: int = IDLE
 var health = 10
 var maxhealth = 10
+var return_speed = 50
 # Called when the node enters the scene tree for the first time.
+
+var isntanced_position
 func _ready():
+	isntanced_position = global_position;
 	healthText.text = generate_health_string()
 
 func generate_health_string():
@@ -43,7 +47,8 @@ func idle_feature():
 	var player_node = get_tree().get_root().find_node("Player", true, false)
 	if(detectionZone.overlaps_body(player_node) || detectionZone.overlaps_area(player_node)):
 		state = ATTACK
-	pass
+	else:
+		return_to_instanced_area()
 
 func frozen():
 	state_label.text = "FROZEN"
@@ -118,3 +123,9 @@ func hurt():
 func _on_StaggerTime_timeout():
 	if(state != FROZEN):
 		state = IDLE
+
+func return_to_instanced_area():
+#	print("RETURNING")
+	var player_direction = isntanced_position - self.position
+	move_and_slide(return_speed * player_direction.normalized())
+	

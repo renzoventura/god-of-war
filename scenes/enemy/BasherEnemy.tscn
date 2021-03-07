@@ -52,7 +52,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="BashTimer" type="Timer" parent="." index="12"]
-wait_time = 2.0
+wait_time = 1.5
 one_shot = true
 [connection signal="body_entered" from="AttackRange/AttackRange2" to="." method="_on_AttackRange2_body_entered"]
 [connection signal="body_exited" from="AttackRange/AttackRange2" to="." method="_on_AttackRange2_body_exited"]

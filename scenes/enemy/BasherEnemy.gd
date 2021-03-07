@@ -4,7 +4,7 @@ var player = null
 export var SPEED:int = 30
 const BASH_SPEED = 400
 
-var charge_timer_lenght_list = [0.3, 0.5, 0.8, 1, 1.3]
+var charge_timer_lenght_list = [0.3, 0.5, 0.8, 1]
 
 onready var animationPlayer = $"AnimationPlayer"
 onready var bashTimer = $"BashTimer"
@@ -79,10 +79,10 @@ func _on_CoolDownTimer_timeout():
 
 func _on_AttackHitBox_body_entered(body):
 	if(body.name == "Player" ):
-		print("BASHER HIT PLAYER")
+#		print("BASHER HIT PLAYER")
 		resting = true
 		coolDownTimer.start()
 	elif(body.name == "TileMap"):
-		print("BASHER HIT ENVIRONMENT")
+#		print("BASHER HIT ENVIRONMENT")
 		is_bashing = false
 		state = IDLE
