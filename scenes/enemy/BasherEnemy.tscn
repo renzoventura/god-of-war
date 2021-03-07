@@ -34,6 +34,7 @@ collision_layer = 0
 shape = SubResource( 1 )
 
 [node name="AttackHitBox" type="Area2D" parent="." index="8"]
+visible = false
 position = Vector2( 0.184021, 0 )
 collision_layer = 8
 
