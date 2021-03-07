@@ -4,6 +4,8 @@ var player = null
 export var SPEED:int = 30
 const BASH_SPEED = 400
 
+var charge_timer_lenght_list = [0.3, 0.5, 0.8, 1, 1.3]
+
 onready var animationPlayer = $"AnimationPlayer"
 onready var bashTimer = $"BashTimer"
 onready var chargeTimer = $"ChargeTimer"
@@ -24,7 +26,8 @@ func attack_feature():
 			attackHitBoxShape.disabled = false
 			bash_attack()
 	else:
-#		print("RESTING")
+		SPEED = 10
+		chase_player()
 		pass
 
 func chase_player():
@@ -55,6 +58,7 @@ func _on_AttackRange2_body_entered(body):
 		player = get_tree().get_root().find_node("Player", true, false)
 		last_player_position = player.position - self.position
 		is_bashing = true
+		chargeTimer.wait_time = charge_timer_lenght_list[randi() % charge_timer_lenght_list.size()]
 		chargeTimer.start()
 		bashTimer.start()
 
@@ -80,4 +84,5 @@ func _on_AttackHitBox_body_entered(body):
 		coolDownTimer.start()
 	elif(body.name == "TileMap"):
 		print("BASHER HIT ENVIRONMENT")
+		is_bashing = false
 		state = IDLE
