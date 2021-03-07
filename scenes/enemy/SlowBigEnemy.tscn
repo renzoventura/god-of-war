@@ -7,7 +7,6 @@
 
 [node name="SlowBigEnemy" instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
-scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]

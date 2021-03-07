@@ -8,6 +8,9 @@ var spin_value = 0
 func _ready():
 	health = 20
 	maxhealth = 20
+	isntanced_position = global_position;
+	healthText.text = generate_health_string()
+	set_up_health_bar()
 	pass # Replace with function body.
 
 func attack_feature():

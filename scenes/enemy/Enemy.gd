@@ -8,6 +8,7 @@ onready var state_label = $State
 onready var staggerTimer = $StaggerTime
 onready var healthText = $HealthText
 onready var detectionZone = $"AI/DectectionZone"
+onready var healthbar = $"Position2D/HealthBar"
 
 var motion = Vector2(0,0)
 var isFrozen = false;
@@ -18,9 +19,11 @@ var return_speed = 50
 # Called when the node enters the scene tree for the first time.
 
 var isntanced_position
+
 func _ready():
 	isntanced_position = global_position;
 	healthText.text = generate_health_string()
+	set_up_health_bar()
 
 func generate_health_string():
 	var text = str(health) + "/" + str(maxhealth)
@@ -28,7 +31,8 @@ func generate_health_string():
 	
 	
 func _process(delta):
-	healthText.text = generate_health_string()
+#	healthText.text = generate_health_string()
+	update_health_bar()
 	match state:
 		IDLE:
 			idle()
@@ -129,3 +133,9 @@ func return_to_instanced_area():
 	var player_direction = isntanced_position - self.position
 	move_and_slide(return_speed * player_direction.normalized())
 	
+func set_up_health_bar():
+	healthbar.value = health
+	healthbar.max_value = maxhealth
+
+func update_health_bar():
+	healthbar.value = health

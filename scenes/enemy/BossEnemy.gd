@@ -19,9 +19,12 @@ var max_moved_value_list = [30, 50, 80]
 var max_negative_moved_value_list = [-30, 0] 
 
 func _ready():
-	orbsRandomizer.start()
 	health = 100
 	maxhealth = 100
+	isntanced_position = global_position;
+	healthText.text = generate_health_string()
+	set_up_health_bar()
+	orbsRandomizer.start()
 	pass # Replace with function body.
 
 func attack_feature():
