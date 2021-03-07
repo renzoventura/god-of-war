@@ -85,7 +85,7 @@ func force_retrieve():
 	if(body_sticked_on != null):
 		get_tree().call_group("Enemy", "toggle_frozen", false)
 		if(body_sticked_on.name == "BossEnemy"):
-			get_tree().call_group("Player", "toggle_is_charged", true, mana)
+			get_tree().call_group("Player", "toggle_is_charged", true, recharge_mana_amount)
 		else:
 			get_tree().call_group("Player", "toggle_is_charged", true, recharge_mana_amount)
 	else:
