@@ -29,7 +29,6 @@ func frozen_feature():
 func spin_orbs():
 	weapons.set_rotation_degrees(get_rotation()) 
 	update_rotation(weapons.rotation_degrees)
-	print(weapons.rotation_degrees)
 
 var is_adding = false
 
@@ -38,7 +37,6 @@ func get_rotation():
 		return weapons.rotation_degrees - PI/2;
 	else:
 		return weapons.rotation_degrees + PI/2
-	print(weapons.rotation_degrees)
 		
 func update_rotation(value):
 	if(value > 359): 
