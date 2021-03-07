@@ -82,7 +82,13 @@ func retrieve_position():
 		fly_speed = 4 * 60
 		
 func force_retrieve():
-	get_tree().call_group("Player", "toggle_is_charged", false, mana)
+	if(body_sticked_on != null):
+		body_sticked_on.toggle_frozen(false)
+		get_tree().call_group("Enemy", "toggle_frozen", false)
+		get_tree().call_group("Player", "toggle_is_charged", true, recharge_mana_amount)
+	else:
+		get_tree().call_group("Player", "toggle_is_charged", false, mana)
+#	get_tree().call_group("Player", "toggle_is_charged", false, mana)
 	state = RETRIEVE
 	fly_speed = 4 * 60
 
