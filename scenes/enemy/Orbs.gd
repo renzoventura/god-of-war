@@ -12,7 +12,7 @@ func _ready():
 
 
 var is_adding = false
-func _process(delta):
+func _process(_delta):
 	rotation_degrees = rotation_degrees - 5;
 	update_rotation()
 		

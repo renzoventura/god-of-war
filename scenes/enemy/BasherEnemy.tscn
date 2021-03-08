@@ -1,8 +1,57 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/enemy/Enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/enemy/basher_enemy.png" type="Texture" id=2]
+[ext_resource path="res://assets/enemy/basher-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://scenes/enemy/BasherEnemy.gd" type="Script" id=3]
+[ext_resource path="res://scenes/enemy/BasherSpritePlayer.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=5]
+resource_name = "bash"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 2, 3, 5 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hurt"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 151.132
@@ -19,6 +68,21 @@ SPEED = 500
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+vframes = 3
+hframes = 4
+frame = 4
+
+[node name="BasherSpritePlayer" type="AnimationPlayer" parent="Sprite" index="0"]
+anims/bash = SubResource( 5 )
+anims/hurt = SubResource( 6 )
+anims/idle = SubResource( 4 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = true
+
+[node name="EnemyHitbox" parent="." index="2"]
+visible = true
 
 [node name="DectectionZone" parent="AI" index="0"]
 scale = Vector2( 3, 3 )
@@ -44,16 +108,18 @@ shape = SubResource( 2 )
 anims/BashAttack = SubResource( 3 )
 
 [node name="CoolDownTimer" type="Timer" parent="." index="10"]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="ChargeTimer" type="Timer" parent="." index="11"]
-wait_time = 0.5
 one_shot = true
 
 [node name="BashTimer" type="Timer" parent="." index="12"]
 wait_time = 1.5
 one_shot = true
+[connection signal="animate_bashing" from="." to="Sprite/BasherSpritePlayer" method="_on_BasherEnemy_animate_bashing"]
+[connection signal="animate_hurt" from="." to="Sprite/BasherSpritePlayer" method="_on_BasherEnemy_animate_hurt"]
+[connection signal="animate_idle" from="." to="Sprite/BasherSpritePlayer" method="_on_BasherEnemy_animate_idle"]
 [connection signal="body_entered" from="AttackRange/AttackRange2" to="." method="_on_AttackRange2_body_entered"]
 [connection signal="body_exited" from="AttackRange/AttackRange2" to="." method="_on_AttackRange2_body_exited"]
 [connection signal="body_entered" from="AttackHitBox" to="." method="_on_AttackHitBox_body_entered"]

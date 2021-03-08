@@ -44,6 +44,7 @@ modulate = Color( 1, 0.294118, 0.294118, 1 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 3
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" index="0"]
 anims/hurt = SubResource( 2 )
