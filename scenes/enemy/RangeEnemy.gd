@@ -6,10 +6,12 @@ onready var bullet_timer = $"BulletSpawner"
 var canAttack : bool = false
 var bullet_cooldown : bool = false
 var charge_timer_lenght_list = [1,2,3,4]
+onready var sprite = $"Sprite"
 
 signal animate_hurt
 signal animate_walk
 
+var is_facing_right = false
 
 func _ready():
 	health = 2
@@ -20,14 +22,18 @@ func _ready():
 	bullet_timer.wait_time = charge_timer_lenght_list[randi() % charge_timer_lenght_list.size()]
 	bullet_timer.start()
 
-
-#func idle_feature():
-#	pass
+func idle_feature():
+	animate_idle()
+	var player_node = get_tree().get_root().find_node("Player", true, false)
+	if(detectionZone.overlaps_body(player_node) || detectionZone.overlaps_area(player_node)):
+		state = ATTACK
 
 func frozen_feature():
 	pass
 	
 func attack_feature():
+	animate_idle()
+	update_color_if_cooldown()
 	if(canAttack):
 		fireBullet()
 		canAttack = false
@@ -43,11 +49,29 @@ func fireBullet():
 	var bullet_instance = bullet.instance()
 	var dir = (player.global_position - global_position).normalized()
 	bullet_instance.direction = dir
-	bullet_timer.wait_time = charge_timer_lenght_list[randi() % charge_timer_lenght_list.size()]
 #	print(bullet_timer.wait_time)
 	bullet_container.add_child(bullet_instance)
 	bullet_timer.start()
+#	print("attacked")
 
 func _on_BulletSpawner_timeout():
+	bullet_timer.wait_time = charge_timer_lenght_list[randi() % charge_timer_lenght_list.size()]
 	canAttack = true
 	bullet_cooldown = true
+
+func animate_idle():
+	emit_signal("animate_walk")
+
+func animate_hurt():
+	emit_signal("animate_hurt")
+	
+func update_color_if_cooldown():
+#	print("canAttack: " + str(canAttack))
+	if(canAttack):
+#		print("can attack")
+		sprite.modulate = Color(255, 75 ,75)
+	else:
+#		print("NOT attack")
+		sprite.modulate = Color(1,1,1)
+		
+
