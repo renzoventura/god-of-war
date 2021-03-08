@@ -25,7 +25,6 @@ var mana = 0
 
 
 func _ready():
-	
 	get_tree().call_group("Enemy", "toggle_frozen", false)
 	is_attacking = false
 	if(first_load):

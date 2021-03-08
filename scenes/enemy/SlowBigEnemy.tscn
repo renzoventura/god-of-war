@@ -45,12 +45,23 @@ script = ExtResource( 3 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 5
-frame = 5
 script = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" index="0"]
 anims/hurt = SubResource( 2 )
 anims/walk = SubResource( 1 )
+
+[node name="EnemyHitbox" parent="." index="2"]
+visible = true
+
+[node name="AI" parent="." index="3"]
+visible = true
+
+[node name="DectectionZone" parent="AI" index="0"]
+visible = false
+
+[node name="CollisionShape2D" parent="AI/DectectionZone" index="0"]
+scale = Vector2( 2, 2 )
 
 [node name="Weapons" type="Node2D" parent="." index="7"]
 
