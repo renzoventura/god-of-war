@@ -33,7 +33,7 @@ func _ready():
 	if(get_tree().call_group("GUI", "get_is_charged")):
 #		print("RECHARGING MANA")
 		mana = recharge_mana_amount
-	get_tree().call_group("GUI", "update_mana", mana)
+	get_tree().call_group("GUI", "update_mana", mana, recharge_mana_amount)
 	get_tree().call_group("GUI", "update_axe", true)
 	idle_position()
 
@@ -171,4 +171,4 @@ func has_mana_damage():
 func use_up_mana():
 	if(state != STICK):
 		mana -= 1
-		get_tree().call_group("GUI", "update_mana", mana)
+		get_tree().call_group("GUI", "update_mana", mana, recharge_mana_amount)
