@@ -1,100 +1,63 @@
 extends "res://scenes/enemy/Enemy.gd"
 
-var player = null
-export var SPEED:int = 30
-const BASH_SPEED = 200
-
-var charge_timer_lenght_list = [0.5]
-
-onready var animationPlayer = $"AnimationPlayer"
-onready var bashTimer = $"BashTimer"
-onready var chargeTimer = $"ChargeTimer"
-onready var coolDownTimer = $"CoolDownTimer"
-onready var attackHitBoxShape = $"AttackHitBox/CollisionShape2D"
-var is_bashing:bool = false
-var is_done_charging: bool = false
-var last_player_position; 
-var resting = false
-
 signal animate_bashing
 signal animate_idle
 signal animate_hurt
 
-func attack_feature():
+var BASH_SPEED = 120
+
+onready var animationPlayer = $"AnimationPlayer"
+onready var attackHitBoxShape = $"AttackHitBox/CollisionShape2D"
+onready var canBashTimer = $"Cooldown"
+
+onready var bashDurationTimer = $"BashDuration"
+export var SPEED:int = 10
+var list_of_speed = [100, 110, 120, 130, 140]
+var last_player_position; 
+var player = null
+
+var can_bash = true
+var is_bashing = false
+var is_facing_right = false
+func _ready():
 	randomize()
-#	if(true):
-	if(!resting):
-		if(!is_bashing):
-			attackHitBoxShape.disabled = true
-			SPEED = 30
-			chase_player()
-			animate_idle()
-		else:
-			attackHitBoxShape.disabled = false
-			bash_attack()
-	else:
-		SPEED = 15
-		animate_idle()
-		chase_player()
-		pass
+	BASH_SPEED = list_of_speed[randi() % list_of_speed.size()]
+#	BASH_SPEED = 150
+	isntanced_position = global_position;
+	healthText.text = generate_health_string()
+	set_up_health_bar()
+	
+func attack_feature():
+	bash_attack()
 
 func chase_player():
+	animate_idle()
 	player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = player.position - self.position
-	move_and_slide(SPEED * player_direction.normalized())
+	is_facing_right = player_direction.x > 0
+	move_and_slide(30 * player_direction.normalized())
 	
-
 func bash_attack():
-	SPEED = BASH_SPEED
 	var player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = last_player_position
-	if(is_done_charging):
-		chargeTimer.start()
-		print("DONE CHARGING")
-		animate_bashing()
-		move_and_slide(SPEED * player_direction.normalized())
-	else:
-		print("CHARGING")
-		animate_idle()
-
-func get_target()->Vector2:
-	var player = get_tree().get_root().find_node("Player", true, false)
-	var player_direction = (player.global_position)
-	return player_direction + Vector2(0,-2)
+	is_facing_right = player_direction.x > 0
+	animate_bashing()
+	move_and_slide(BASH_SPEED * player_direction.normalized())
 
 func _on_AttackRange2_body_entered(body):
-	if (state == ATTACK and !is_bashing):
-		is_done_charging = true
+	if (state == ATTACK):
 		player = get_tree().get_root().find_node("Player", true, false)
 		last_player_position = player.position - self.position
-		is_bashing = true
-		chargeTimer.wait_time = charge_timer_lenght_list[randi() % charge_timer_lenght_list.size()]
-		chargeTimer.start()
-		bashTimer.start()
 
 func _on_AttackRange2_body_exited(body):
 	pass # Replace with function body.
 
-func _on_BashTimer_timeout():
-	is_bashing = false
-	is_done_charging = false
-	resting = false
-	coolDownTimer.start()
-
-func _on_ChargeTimer_timeout():
-	is_done_charging = true
-
-func _on_CoolDownTimer_timeout():
-	resting = false
-	is_bashing = true
-	
 func _on_AttackHitBox_body_entered(body):
+	player = get_tree().get_root().find_node("Player", true, false)
 	if(body.name == "Player"):
-		resting = true
-		coolDownTimer.start()
+		last_player_position = -player.position - self.position
 	elif(body.name == "TileMap"):
-		is_bashing = false
-		state = IDLE
+		last_player_position = player.position - self.position
 		
 func idle_feature():
 	animate_idle()
@@ -105,7 +68,7 @@ func idle_feature():
 		return_to_instanced_area()
 
 func animate_idle():
-	emit_signal("animate_idle")
+	emit_signal("animate_idle",  is_facing_right)
 	
 func hurt():
 	animate_hurt()
@@ -115,5 +78,10 @@ func animate_hurt():
 	emit_signal("animate_hurt")
 
 func animate_bashing():
-	emit_signal("animate_bashing")
+	emit_signal("animate_bashing", is_facing_right)
 
+func _on_Cooldown_timeout():
+	can_bash = true
+
+func _on_BashDuration_timeout():
+	is_bashing = false

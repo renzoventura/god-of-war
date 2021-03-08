@@ -16,8 +16,13 @@ func _ready():
 #	pass
 
 
-func _on_BasherEnemy_animate_bashing():
+func _on_BasherEnemy_animate_bashing(is_facing_right):
 	play("bash")
+	if(!is_facing_right):
+		get_parent().flip_h = true
+	else:
+		get_parent().flip_h = false
+
 	pass # Replace with function body.
 
 
@@ -26,6 +31,10 @@ func _on_BasherEnemy_animate_hurt():
 	pass # Replace with function body.
 
 
-func _on_BasherEnemy_animate_idle():
+func _on_BasherEnemy_animate_idle(is_facing_right):
 	play("idle")
+	if(!is_facing_right):
+		get_parent().flip_h = true
+	else:
+		get_parent().flip_h = false
 	pass # Replace with function body.
