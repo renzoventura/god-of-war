@@ -1,14 +1,23 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/enemy/Enemy.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/enemy/range_enemy.png" type="Texture" id=2]
+[ext_resource path="res://assets/enemy/ranger-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://scenes/enemy/RangeEnemy.gd" type="Script" id=3]
+[ext_resource path="res://scenes/enemy/AnimationPlayer.gd" type="Script" id=4]
 
 [node name="RangeEnemy" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource( 2 )
+vframes = 2
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" index="0"]
+script = ExtResource( 4 )
+
+[node name="EnemyHitbox" parent="." index="2"]
+visible = true
 
 [node name="AI" parent="." index="3"]
 visible = true

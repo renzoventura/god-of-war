@@ -7,6 +7,10 @@ var canAttack : bool = false
 var bullet_cooldown : bool = false
 var charge_timer_lenght_list = [1,2,3,4]
 
+signal animate_hurt
+signal animate_walk
+
+
 func _ready():
 	health = 2
 	maxhealth = 2
