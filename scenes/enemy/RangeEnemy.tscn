@@ -50,18 +50,14 @@ anims/hurt = SubResource( 2 )
 anims/idle = SubResource( 1 )
 script = ExtResource( 4 )
 
-[node name="EnemyHitbox" parent="." index="2"]
-visible = true
-
 [node name="CollisionShape2D" parent="EnemyHitbox" index="0"]
 visible = false
 
-[node name="AI" parent="." index="3"]
-visible = true
-
 [node name="DectectionZone" parent="AI" index="0"]
-visible = false
 scale = Vector2( 2, 2 )
+
+[node name="State" parent="." index="4"]
+visible = false
 
 [node name="Bullets" type="Node2D" parent="." index="7"]
 

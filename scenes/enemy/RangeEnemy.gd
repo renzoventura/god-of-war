@@ -14,8 +14,8 @@ signal animate_walk
 var is_facing_right = false
 
 func _ready():
-	health = 2
-	maxhealth = 2
+	health = 4
+	maxhealth = 4
 	isntanced_position = global_position;
 	healthText.text = generate_health_string()
 	set_up_health_bar()

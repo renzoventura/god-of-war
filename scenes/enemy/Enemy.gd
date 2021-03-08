@@ -9,6 +9,7 @@ onready var staggerTimer = $StaggerTime
 onready var healthText = $HealthText
 onready var detectionZone = $"AI/DectectionZone"
 onready var healthbar = $"Position2D/HealthBar"
+onready var sprite_base = $Sprite
 
 var motion = Vector2(0,0)
 var isFrozen = false;
@@ -31,6 +32,7 @@ func generate_health_string():
 	
 	
 func _process(delta):
+	modulate_if_frozen()
 #	healthText.text = generate_health_string()
 	update_health_bar()
 	match state:
@@ -146,3 +148,9 @@ func set_up_health_bar():
 
 func update_health_bar():
 	healthbar.value = health
+
+func modulate_if_frozen():
+	if(state == FROZEN):
+		sprite_base.self_modulate = Color(0,2, 2)
+	else:
+		sprite_base.self_modulate = Color(1, 1, 1)

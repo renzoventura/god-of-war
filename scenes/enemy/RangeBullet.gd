@@ -9,7 +9,7 @@ func _ready():
 var is_adding = false
 func _process(delta):
 	translate(direction*speed*delta)
-	rotation_degrees = rotation_degrees - 5;
+	rotation_degrees = rotation_degrees - 30;
 	update_rotation()
 
 func _on_Area2D_area_entered(area):
