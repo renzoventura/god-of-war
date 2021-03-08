@@ -15,7 +15,7 @@ var max_lives : int = 6
 var motion = Vector2(0,0)
 var SPEED  : int = 100;
 var MAX_SPEED  : int = 700;
-var DASH_SPEED : int = 700;
+var DASH_SPEED : int = 500;
 var is_thrown = false
 var state : int = IDLE
 var isDashEnabled = true;
@@ -124,6 +124,8 @@ func dashing(delta):
 		motion = Vector2(0, 0)
 		dash_acc = 0
 	move_and_slide(motion)
+	animate_dash()
+	
 
 func move_sword():
 	if(!is_thrown):
@@ -202,3 +204,6 @@ func animate_walk():
 
 func animate_hurt():
 	emit_signal("animate_hurt")
+
+func animate_dash():
+	emit_signal("animate_dodge")
