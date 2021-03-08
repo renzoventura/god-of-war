@@ -23,6 +23,7 @@ var isntanced_position
 
 func _ready():
 	randomize()
+
 	isntanced_position = global_position;
 	healthText.text = generate_health_string()
 	set_up_health_bar()

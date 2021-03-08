@@ -4,20 +4,25 @@ signal animate_bashing
 signal animate_idle
 signal animate_hurt
 
-const BASH_SPEED = 200
+var BASH_SPEED = 120
 
 onready var animationPlayer = $"AnimationPlayer"
 onready var attackHitBoxShape = $"AttackHitBox/CollisionShape2D"
+onready var canBashTimer = $"Cooldown"
 
-export var SPEED:int = 30
-
+onready var bashDurationTimer = $"BashDuration"
+export var SPEED:int = 10
+var list_of_speed = [100, 110, 120, 130, 140]
 var last_player_position; 
 var player = null
 
+var can_bash = true
 var is_bashing = false
 
 func _ready():
 	randomize()
+	BASH_SPEED = list_of_speed[randi() % list_of_speed.size()]
+#	BASH_SPEED = 150
 	isntanced_position = global_position;
 	healthText.text = generate_health_string()
 	set_up_health_bar()
@@ -26,16 +31,16 @@ func attack_feature():
 	bash_attack()
 
 func chase_player():
+	animate_idle()
 	player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = player.position - self.position
-	move_and_slide(SPEED * player_direction.normalized())
+	move_and_slide(30 * player_direction.normalized())
 	
 func bash_attack():
-	SPEED = BASH_SPEED
 	var player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = last_player_position
 	animate_bashing()
-	move_and_slide(SPEED * player_direction.normalized())
+	move_and_slide(BASH_SPEED * player_direction.normalized())
 
 func _on_AttackRange2_body_entered(body):
 	if (state == ATTACK):
@@ -46,16 +51,11 @@ func _on_AttackRange2_body_exited(body):
 	pass # Replace with function body.
 
 func _on_AttackHitBox_body_entered(body):
+	player = get_tree().get_root().find_node("Player", true, false)
 	if(body.name == "Player"):
-		print("HIT PLAYER")
-		player = get_tree().get_root().find_node("Player", true, false)
 		last_player_position = -player.position - self.position
-		state = IDLE
 	elif(body.name == "TileMap"):
-		print("HIT TILEMAP")
-		player = get_tree().get_root().find_node("Player", true, false)
 		last_player_position = player.position - self.position
-		state = IDLE
 		
 func idle_feature():
 	animate_idle()
@@ -78,3 +78,8 @@ func animate_hurt():
 func animate_bashing():
 	emit_signal("animate_bashing")
 
+func _on_Cooldown_timeout():
+	can_bash = true
+
+func _on_BashDuration_timeout():
+	is_bashing = false
