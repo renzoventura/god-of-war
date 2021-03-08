@@ -1,11 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/level/manual_tile/EnvironTileSet.tres" type="TileSet" id=2]
 [ext_resource path="res://scenes/level/TemplateLevel.gd" type="Script" id=3]
-[ext_resource path="res://scenes/enemy/SlowBigEnemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/enemy/BossEnemy.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/enemy/RangeEnemy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/enemy/BasherEnemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/level/GameGUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/player/player_background.png" type="Texture" id=10]
 
@@ -17,59 +14,6 @@ position = Vector2( -48, 72 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="BasherEnemy5" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 95.4776, -72.8786 )
-collision_mask = 3
-
-[node name="BasherEnemy6" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( -560, 344 )
-collision_mask = 3
-
-[node name="RangeEnemy" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( -552, 152 )
-collision_mask = 3
-
-[node name="RangeEnemy2" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( -824, 168 )
-collision_mask = 3
-
-[node name="RangeEnemy4" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( -775.764, -100.959 )
-collision_mask = 3
-
-[node name="RangeEnemy3" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( -680, 368 )
-collision_mask = 3
-
-[node name="SlowBigEnemy" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( 693.846, 2.09543 )
-
-[node name="BasherEnemy8" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( -1200, -272 )
-collision_mask = 3
-
-[node name="BasherEnemy7" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( -744, -480 )
-collision_mask = 3
-
-[node name="RangeEnemy8" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( -784, -248 )
-collision_mask = 3
-
-[node name="RangeEnemy7" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( -1296, -416 )
-collision_mask = 3
-
-[node name="RangeEnemy5" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( -992, -568 )
-collision_mask = 3
-
-[node name="SlowBigEnemy2" parent="Enemies" instance=ExtResource( 4 )]
-position = Vector2( -1064, -448 )
-
-[node name="BossEnemy" parent="Enemies" instance=ExtResource( 5 )]
-position = Vector2( -216, -448 )
-
 [node name="GUI" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
 
@@ -80,3 +24,13 @@ visible = false
 scale = Vector2( 100, 100 )
 z_index = -10
 texture = ExtResource( 10 )
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Environment"]
+scale = Vector2( 2, 2 )
+z_index = -1
+z_as_relative = false
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 16, 16 )
+format = 1
