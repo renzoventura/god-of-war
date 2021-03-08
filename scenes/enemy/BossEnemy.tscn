@@ -8,6 +8,9 @@
 scale = Vector2( 2.5, 2.5 )
 script = ExtResource( 2 )
 
+[node name="State" parent="." index="4"]
+visible = false
+
 [node name="Weapons" type="Node2D" parent="." index="7"]
 
 [node name="Position2D" type="Position2D" parent="Weapons" index="0"]

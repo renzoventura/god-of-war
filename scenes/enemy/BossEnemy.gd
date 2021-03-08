@@ -58,7 +58,7 @@ func update_rotation(value):
 
 func move_orbs():
 	moved_value += value
-	print(moved_value)
+#	print(moved_value)
 	update_moved_value()
 	for positions in weapons.get_children():
 		if(positions.position.y > 0):

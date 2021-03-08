@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/enemy/BasherEnemy.gd" type="Script" id=3]
 [ext_resource path="res://scenes/enemy/BasherSpritePlayer.gd" type="Script" id=4]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=1]
 resource_name = "bash"
 length = 0.35
 tracks/0/type = "value"
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "values": [ 4, 2, 3, 5 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=2]
 resource_name = "hurt"
 length = 0.1
 tracks/0/type = "value"
@@ -37,7 +37,7 @@ tracks/0/keys = {
 "values": [ 8 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "idle"
 length = 0.3
 tracks/0/type = "value"
@@ -53,12 +53,12 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=4]
 radius = 209.763
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id=5]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=6]
 length = 2.0
 step = 0.05
 
@@ -73,9 +73,9 @@ hframes = 4
 frame = 4
 
 [node name="BasherSpritePlayer" type="AnimationPlayer" parent="Sprite" index="0"]
-anims/bash = SubResource( 5 )
-anims/hurt = SubResource( 6 )
-anims/idle = SubResource( 4 )
+anims/bash = SubResource( 1 )
+anims/hurt = SubResource( 2 )
+anims/idle = SubResource( 3 )
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -101,7 +101,7 @@ visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange/AttackRange2" index="0"]
-shape = SubResource( 1 )
+shape = SubResource( 4 )
 
 [node name="AttackHitBox" type="Area2D" parent="." index="8"]
 visible = false
@@ -109,10 +109,10 @@ position = Vector2( 0.184021, 0 )
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitBox" index="0"]
-shape = SubResource( 2 )
+shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
-anims/BashAttack = SubResource( 3 )
+anims/BashAttack = SubResource( 6 )
 
 [node name="BashDuration" type="Timer" parent="." index="11"]
 wait_time = 2.0

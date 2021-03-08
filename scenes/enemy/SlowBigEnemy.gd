@@ -16,7 +16,7 @@ func _ready():
 	randomize()
 	SPEED = list_of_speed[randi() % list_of_speed.size()]
 	orb_speed = list_of_rotation_speed[randi() % list_of_rotation_speed.size()]
-	print(SPEED)
+#	print(SPEED)
 	health = 25
 	maxhealth = 25
 	isntanced_position = global_position;
