@@ -99,13 +99,19 @@ func _on_EnemyHitbox_area_entered(area):
 	
 
 func toggle_frozen(value):
-	if(isFrozen != value):
-		isFrozen = value;
-		if(isFrozen):
-			state = FROZEN
-		else:
-			staggerTimer.start()
-			state = IDLE
+	if(value):
+		isFrozen = value
+		state = FROZEN
+	else:
+		isFrozen = value
+		state = IDLE
+#	if(isFrozen != value):
+#		isFrozen = value;
+#		if(isFrozen):
+#			state = FROZEN
+#		else:
+#			staggerTimer.start()
+#			state = IDLE
 
 func _on_DectectionZone_body_entered(body):
 	if(body.name == "Player" and state != FROZEN):
