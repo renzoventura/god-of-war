@@ -19,6 +19,7 @@ var max_moved_value_list = [30, 50, 80]
 var max_negative_moved_value_list = [-30, 0] 
 
 func _ready():
+	randomize()
 	health = 100
 	maxhealth = 100
 	isntanced_position = global_position;

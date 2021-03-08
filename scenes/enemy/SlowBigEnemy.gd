@@ -1,16 +1,22 @@
 extends "res://scenes/enemy/Enemy.gd"
 
 var player = null
-export var SPEED:int = 30
+var SPEED:int = 30
 onready var weapons = $"Weapons"
 var spin_value = 0
-
+var list_of_speed = [15, 20, 25, 30, 35, 40]
 signal animate_hurt
 signal animate_walk
 
 var is_facing_right = false
-
+var list_of_rotation_speed = [PI/1.5, PI/2, PI/3, PI/2.5]
+var orb_speed = PI/2
 func _ready():
+	
+	randomize()
+	SPEED = list_of_speed[randi() % list_of_speed.size()]
+	orb_speed = list_of_rotation_speed[randi() % list_of_rotation_speed.size()]
+	print(SPEED)
 	health = 25
 	maxhealth = 25
 	isntanced_position = global_position;
@@ -46,9 +52,9 @@ var is_adding = false
 
 func get_rotation():
 	if(is_adding):
-		return weapons.rotation_degrees - PI/2;
+		return weapons.rotation_degrees - orb_speed;
 	else:
-		return weapons.rotation_degrees + PI/2
+		return weapons.rotation_degrees + orb_speed
 		
 func update_rotation(value):
 	if(value > 359): 

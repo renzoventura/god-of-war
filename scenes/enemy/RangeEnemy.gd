@@ -14,6 +14,7 @@ signal animate_walk
 var is_facing_right = false
 
 func _ready():
+	randomize()
 	health = 4
 	maxhealth = 4
 	isntanced_position = global_position;

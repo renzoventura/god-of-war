@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/enemy/enemy_health_empty.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.83179, 5.13805 )
+extents = Vector2( 5.8871, 5.61039 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.43775, 8.82231 )
@@ -26,9 +26,11 @@ script = ExtResource( 2 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 
 [node name="EnemyHitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 3
 

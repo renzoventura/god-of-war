@@ -17,6 +17,7 @@ var last_player_position;
 var resting = false
 
 func attack_feature():
+	randomize()
 	if(!resting):
 		if(!is_bashing):
 			attackHitBoxShape.disabled = true
