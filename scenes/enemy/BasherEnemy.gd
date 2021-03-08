@@ -14,8 +14,15 @@ export var SPEED:int = 30
 var last_player_position; 
 var player = null
 
-func attack_feature():
+var is_bashing = false
+
+func _ready():
 	randomize()
+	isntanced_position = global_position;
+	healthText.text = generate_health_string()
+	set_up_health_bar()
+	
+func attack_feature():
 	bash_attack()
 
 func chase_player():
@@ -41,6 +48,9 @@ func _on_AttackRange2_body_exited(body):
 func _on_AttackHitBox_body_entered(body):
 	if(body.name == "Player"):
 		print("HIT PLAYER")
+		player = get_tree().get_root().find_node("Player", true, false)
+		last_player_position = -player.position - self.position
+		state = IDLE
 	elif(body.name == "TileMap"):
 		print("HIT TILEMAP")
 		player = get_tree().get_root().find_node("Player", true, false)
