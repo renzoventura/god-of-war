@@ -81,20 +81,21 @@ func hit(damage):
 
 
 func _on_EnemyHitbox_area_entered(area):
-	if (area.name == "SwordArea" and state != HURT):
-		if(area.get_parent().is_flying()):
-			hit(thrown_damage)
-			toggle_frozen(true)
-		elif(area.get_parent().is_returning()):
-			hit(thrown_damage)
-		elif(area.get_parent().is_idle()): 
-			if (area.get_parent().has_mana_damage()):
-				area.get_parent().use_up_mana()
-				hit(swing_damage * 2)
+	if(state != FROZEN):
+		if (area.name == "SwordArea" and state != HURT):
+			if(area.get_parent().is_flying()):
+				hit(thrown_damage)
+				toggle_frozen(true)
+			elif(area.get_parent().is_returning()):
+				hit(thrown_damage)
+			elif(area.get_parent().is_idle()): 
+				if (area.get_parent().has_mana_damage()):
+					area.get_parent().use_up_mana()
+					hit(swing_damage * 2)
+				else:
+					hit(swing_damage)
 			else:
-				hit(swing_damage)
-		else:
-			hit(thrown_damage)
+				hit(thrown_damage)
 	
 
 func toggle_frozen(value):
