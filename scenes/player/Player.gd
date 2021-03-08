@@ -28,10 +28,16 @@ onready var dashTimer = $"DashTimer"
 onready var staminaChargerTimer = $"StaminaChargerTimer"
 onready var hurtTimer = $"HurtTimer"
 onready var playerStateLabel = $"PlayerState"
+onready var sprite = $"SpriteAnimation"
 
 var is_charged : bool = false
 var axe_mana : int = 0
 var is_invinsible : bool = false
+var is_facing_right : bool = true
+
+signal animate_walk;
+signal animate_dodge;
+signal animate_hurt;
 
 func _ready():
 	update_lives_gui()
@@ -49,13 +55,15 @@ func _process(delta):
 
 func hurting():
 	playerStateLabel.text = "HURT"
-	move()
-	move_sword()
-	move_and_slide(motion)
+	animate_hurt()
+#	move()
+#	move_sword()
+#	move_and_slide(motion)
 	
 func idle():
 	playerStateLabel.text = "IDLE"
 	move()
+	animate_walk()
 	move_sword()
 	dash()
 	move_and_slide(motion)
@@ -82,8 +90,10 @@ func move():
 		motion.y = lerp(motion.y, 0, FRICTION)
 	if Input.is_action_pressed("left"):
 		motion.x = clamp(motion.x - SPEED, -MAX_SPEED, 0)
+		is_facing_right = false
 	elif Input.is_action_pressed("right"):
 		motion.x = clamp(motion.x + SPEED, 0, MAX_SPEED)
+		is_facing_right = true
 	else: 
 		motion.x = lerp(motion.x, 0, FRICTION)
 
@@ -186,3 +196,9 @@ func _on_HitBox_area_entered(area):
 		damage()
 		hurtTimer.start()
 		state = HURT
+
+func animate_walk():
+	emit_signal("animate_walk", motion, is_facing_right)
+
+func animate_hurt():
+	emit_signal("animate_hurt")
