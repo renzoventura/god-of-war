@@ -19,7 +19,10 @@ position = Vector2( -408.332, -25.5229 )
 [node name="BasherEnemy" parent="Enemies" index="3" instance=ExtResource( 4 )]
 position = Vector2( 121.95, 73.8327 )
 
-[node name="BasherEnemy2" parent="Enemies" index="4" instance=ExtResource( 4 )]
+[node name="BasherEnemy3" parent="Enemies" index="4" instance=ExtResource( 4 )]
+position = Vector2( 45.6901, -55.9981 )
+
+[node name="BasherEnemy2" parent="Enemies" index="5" instance=ExtResource( 4 )]
 position = Vector2( -132.04, -8.09937 )
 
 [node name="TileMap" parent="Environment" index="0"]

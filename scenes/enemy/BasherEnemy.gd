@@ -18,7 +18,7 @@ var player = null
 
 var can_bash = true
 var is_bashing = false
-
+var is_facing_right = false
 func _ready():
 	randomize()
 	BASH_SPEED = list_of_speed[randi() % list_of_speed.size()]
@@ -34,11 +34,13 @@ func chase_player():
 	animate_idle()
 	player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = player.position - self.position
+	is_facing_right = player_direction.x > 0
 	move_and_slide(30 * player_direction.normalized())
 	
 func bash_attack():
 	var player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = last_player_position
+	is_facing_right = player_direction.x > 0
 	animate_bashing()
 	move_and_slide(BASH_SPEED * player_direction.normalized())
 
@@ -66,7 +68,7 @@ func idle_feature():
 		return_to_instanced_area()
 
 func animate_idle():
-	emit_signal("animate_idle")
+	emit_signal("animate_idle",  is_facing_right)
 	
 func hurt():
 	animate_hurt()
@@ -76,7 +78,7 @@ func animate_hurt():
 	emit_signal("animate_hurt")
 
 func animate_bashing():
-	emit_signal("animate_bashing")
+	emit_signal("animate_bashing", is_facing_right)
 
 func _on_Cooldown_timeout():
 	can_bash = true
