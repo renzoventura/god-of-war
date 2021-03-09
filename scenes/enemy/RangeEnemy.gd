@@ -44,6 +44,8 @@ func attack_mode_on():
 #		print(bullet_timer.wait_time)
 		bullet_timer.start()
 
+
+	
 func fireBullet():
 	var player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = (player.global_position)
@@ -61,7 +63,10 @@ func _on_BulletSpawner_timeout():
 	bullet_cooldown = true
 
 func animate_idle():
-	emit_signal("animate_walk")
+	var player = get_tree().get_root().find_node("Player", true, false)
+	var player_direction = player.position - self.position
+	is_facing_right = player_direction.x > 0
+	emit_signal("animate_walk", is_facing_right)
 
 func animate_hurt():
 	emit_signal("animate_hurt")

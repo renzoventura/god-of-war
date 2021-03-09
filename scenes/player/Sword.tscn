@@ -149,6 +149,7 @@ position = Vector2( 8, 10 )
 rotation = -2.93557e-08
 scale = Vector2( 1.01521, 1.0268 )
 shape = SubResource( 3 )
+disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 
