@@ -31,7 +31,7 @@ onready var playerStateLabel = $"PlayerState"
 onready var sprite = $"SpriteAnimation"
 onready var camera = $Camera2D
 onready var swingSfx = $"AudioStreamPlayer2D"
-
+onready var powerup = $"PowerUp"
 var is_charged : bool = false
 var axe_mana : int = 0
 var is_invinsible : bool = false
@@ -150,6 +150,8 @@ func renew_axe():
 			n.queue_free()
 		var preloadAxe = preload("res://scenes/player/Sword.tscn")
 		var axeInstance = preloadAxe.instance();
+		if(is_charged):
+			power_sound_effect()
 		axeInstance.init(is_charged, axe_mana)
 		is_charged = false
 		sword_position_container.call_deferred("add_child",axeInstance)
@@ -220,3 +222,7 @@ func shake_camera():
 func dash_sound_effect():
 	swingSfx.pitch_scale = pitch_scales[randi() % pitch_scales.size()] + 1
 	swingSfx.play()
+
+func power_sound_effect():
+	powerup.play()
+
