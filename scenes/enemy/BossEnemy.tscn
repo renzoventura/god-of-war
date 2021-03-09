@@ -98,5 +98,8 @@ position = Vector2( 77.0654, -0.265369 )
 
 [node name="OrbsRandomizer" type="Timer" parent="." index="9"]
 wait_time = 5.0
+
+[node name="HealthBar" parent="Position2D" index="0"]
+visible = false
 [connection signal="animate_idle" from="." to="Sprite/BossSpritePlayer" method="_on_BossEnemy_animate_idle"]
 [connection signal="timeout" from="OrbsRandomizer" to="." method="_on_OrbsRandomizer_timeout"]

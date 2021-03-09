@@ -4,7 +4,6 @@ var player = null
 export var SPEED:int = 30
 onready var weapons = $"Weapons"
 onready var orbsRandomizer = $"OrbsRandomizer"
-
 onready var sprite = $"Sprite"
 var spin_value = 0
 
@@ -27,6 +26,7 @@ var is_facing_right = false
 var color_damage = 1.3
 func _ready():
 	randomize()
+	get_tree().call_group("Level", "add_boss_gui")
 	health = 150
 	maxhealth = 150
 	isntanced_position = global_position;
@@ -123,3 +123,10 @@ func chase_player():
 #	print(player_direction)
 	is_facing_right = player_direction.x > 0
 	animate_idle()
+
+func update_boss_health():
+	get_tree().call_group("BossGUI", "update_health", health, maxhealth)
+
+func update_health_bar():
+	healthbar.value = health
+	update_boss_health()

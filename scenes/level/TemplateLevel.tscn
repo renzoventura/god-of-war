@@ -6,7 +6,9 @@
 [ext_resource path="res://scenes/level/GameGUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/player/player_background.png" type="Texture" id=10]
 
-[node name="TemplateLevel" type="Node2D"]
+[node name="TemplateLevel" type="Node2D" groups=[
+"Level",
+]]
 script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -18,10 +20,10 @@ z_index = 2
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="GUI" type="Node2D" parent="."]
+[node name="GUIs" type="Node2D" parent="."]
 scale = Vector2( 2, 2 )
 
-[node name="GUI" parent="GUI" instance=ExtResource( 8 )]
+[node name="GUI" parent="GUIs" instance=ExtResource( 8 )]
 
 [node name="Sprite" type="Sprite" parent="."]
 visible = false
