@@ -10,10 +10,10 @@ export (bool) var is_attacking = false
 onready var animationPlayer = $"SwordArea/AnimationPlayer"
 onready var parent: = get_parent()
 onready var swordCollision = $"SwordArea/CollisionShape2D"
-
+onready var swingSfx = $Swing
 const recharge_mana_amount = 3
 var enemy_scene = preload("res://scenes/enemy/Enemy.tscn")
-
+var pitch_scales = [0.9, 1.0, 1.2, 1.4]
 var can_return: bool = true
 var state: int = IDLE
 var velocity: = Vector2.ZERO
@@ -48,6 +48,7 @@ func _physics_process(delta):
 			stick()
 
 func attack():
+#		swing_sound_effect()
 		animationPlayer.play("Swing")
 #		print(mana)
 
@@ -171,3 +172,7 @@ func use_up_mana():
 	if(state != STICK):
 		mana -= 1
 		get_tree().call_group("GUI", "update_mana", mana, recharge_mana_amount)
+
+func swing_sound_effect():
+	swingSfx.pitch_scale = pitch_scales[randi() % pitch_scales.size()]
+	swingSfx.play()
