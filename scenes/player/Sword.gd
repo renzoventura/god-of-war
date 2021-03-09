@@ -42,8 +42,10 @@ func _physics_process(delta):
 			idle()
 		FLY:
 			fly(delta)
+			flying_sound_effect()
 		RETRIEVE:
 			retrieve(delta)
+			flying_sound_effect()
 		STICK:
 			stick()
 
@@ -174,5 +176,11 @@ func use_up_mana():
 		get_tree().call_group("GUI", "update_mana", mana, recharge_mana_amount)
 
 func swing_sound_effect():
-	swingSfx.pitch_scale = pitch_scales[randi() % pitch_scales.size()]
+
 	swingSfx.play()
+
+func flying_sound_effect():
+#	swingSfx.pitch_scale = pitch_scales[randi() % pitch_scales.size()]
+	if(!swingSfx.playing):
+		swingSfx.pitch_scale = pitch_scales[randi() % pitch_scales.size()] + 0.3
+		swingSfx.play()

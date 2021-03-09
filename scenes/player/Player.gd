@@ -30,12 +30,14 @@ onready var hurtTimer = $"HurtTimer"
 onready var playerStateLabel = $"PlayerState"
 onready var sprite = $"SpriteAnimation"
 onready var camera = $Camera2D
+onready var swingSfx = $"AudioStreamPlayer2D"
 
 var is_charged : bool = false
 var axe_mana : int = 0
 var is_invinsible : bool = false
 var is_facing_right : bool = true
 var shake_amount : int =  3
+var pitch_scales = [0.9, 1.0, 1.2, 1.4]
 
 signal animate_walk;
 signal animate_dodge;
@@ -101,6 +103,7 @@ func move():
 
 func dash():
 	if(Input.is_action_just_pressed("dash") and isDashEnabled and has_stamina_for(DASH_COST)):
+		dash_sound_effect()
 		stamina -= DASH_COST
 		toggle_hit_box()
 		isDashEnabled = false
@@ -213,3 +216,7 @@ func animate_dash():
 
 func shake_camera():
 	camera.set_offset(Vector2(rand_range(-1.0, 1.0) * shake_amount, rand_range(-1.0, 1.0) * shake_amount))
+	
+func dash_sound_effect():
+	swingSfx.pitch_scale = pitch_scales[randi() % pitch_scales.size()] + 1
+	swingSfx.play()
