@@ -49,6 +49,7 @@ func hurt():
 	
 	
 func frozen_feature():
+	state = ATTACK
 	spin_orbs()
 	move_orbs()
 	chase_player()
@@ -130,9 +131,19 @@ func update_boss_health():
 func update_health_bar():
 	healthbar.value = health
 	update_boss_health()
-
+	
 var orb_pitch_scales = [0.9, 1.0, 1.2, 1.4, 1.6, 1.8, 2]
 func play_orbs_sound():
 	if(!orb_sound.playing):
 		orb_sound.pitch_scale = orb_pitch_scales[randi() % orb_pitch_scales.size()]
 		orb_sound.play()
+
+func hit(damage):
+	if(state != FROZEN):
+		state = HURT
+		staggerTimer.start()
+		update_boss_health()
+		health -= damage
+	if(health <= 0):
+		update_boss_health()
+		queue_free()

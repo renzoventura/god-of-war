@@ -13,9 +13,9 @@ func _ready():
 
 
 func hit_sound_effect():
-	print("PLAYING")
+#	print("PLAYING")
 	pitch_scale = pitch_scales[randi() % pitch_scales.size()]
 	volume_db = -6
-	print(pitch_scale)
+#	print(pitch_scale)
 	stream = load(bgMusic)
 	play()

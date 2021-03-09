@@ -16,7 +16,6 @@ func _ready():
 	randomize()
 	SPEED = list_of_speed[randi() % list_of_speed.size()]
 	orb_speed = list_of_rotation_speed[randi() % list_of_rotation_speed.size()]
-#	print(SPEED)
 	health = 25
 	maxhealth = 25
 	isntanced_position = global_position;
@@ -32,7 +31,7 @@ func chase_player():
 	animate_walk()
 	player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = player.position - self.position
-#	print(player_direction)
+
 	is_facing_right = player_direction.x > 0
 	move_and_slide(SPEED * player_direction.normalized())
 
@@ -67,7 +66,7 @@ func animate_hurt():
 	emit_signal("animate_hurt")
 	
 func return_to_instanced_area():
-#	print("RETURNING")
+
 	var player_direction = isntanced_position - self.position
 	if(round(player_direction.x) != 0):
 		is_facing_right = round(player_direction.x) >= 1
