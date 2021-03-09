@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/enemy/basher-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://scenes/enemy/BasherEnemy.gd" type="Script" id=3]
 [ext_resource path="res://scenes/enemy/BasherSpritePlayer.gd" type="Script" id=4]
+[ext_resource path="res://soundeffects/enemy/chomp.wav" type="AudioStream" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "bash"
-length = 0.35
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -15,10 +16,24 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 4, 2, 3, 5 ]
+"values": [ 4, 2, 3, 5, 0, 1, 2, 3, 4 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "chomp_sound_effect"
+} ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -70,7 +85,7 @@ SPEED = 500
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 4
-frame = 4
+frame = 2
 
 [node name="BasherSpritePlayer" type="AnimationPlayer" parent="Sprite" index="0"]
 anims/bash = SubResource( 1 )
@@ -121,6 +136,9 @@ one_shot = true
 [node name="Cooldown" type="Timer" parent="." index="12"]
 wait_time = 2.0
 one_shot = true
+
+[node name="Chomp" type="AudioStreamPlayer2D" parent="." index="13"]
+stream = ExtResource( 5 )
 [connection signal="animate_bashing" from="." to="Sprite/BasherSpritePlayer" method="_on_BasherEnemy_animate_bashing"]
 [connection signal="animate_hurt" from="." to="Sprite/BasherSpritePlayer" method="_on_BasherEnemy_animate_hurt"]
 [connection signal="animate_idle" from="." to="Sprite/BasherSpritePlayer" method="_on_BasherEnemy_animate_idle"]

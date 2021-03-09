@@ -9,13 +9,13 @@ var BASH_SPEED = 120
 onready var animationPlayer = $"AnimationPlayer"
 onready var attackHitBoxShape = $"AttackHitBox/CollisionShape2D"
 onready var canBashTimer = $"Cooldown"
-
+onready var chomp = $"Chomp"
 onready var bashDurationTimer = $"BashDuration"
 export var SPEED:int = 10
 var list_of_speed = [100, 110, 120, 130, 140]
 var last_player_position; 
 var player = null
-
+var pitch_scales = [0.9, 1.0, 1.2, 1.4]
 var can_bash = true
 var is_bashing = false
 var is_facing_right = false
@@ -42,6 +42,7 @@ func bash_attack():
 	var player_direction = last_player_position
 	is_facing_right = player_direction.x > 0
 	animate_bashing()
+#	chomp_sound_effect()
 	move_and_slide(BASH_SPEED * player_direction.normalized())
 
 func _on_AttackRange2_body_entered(body):
@@ -85,3 +86,8 @@ func _on_Cooldown_timeout():
 
 func _on_BashDuration_timeout():
 	is_bashing = false
+
+func chomp_sound_effect():
+#	if(!chomp.playing):
+	chomp.pitch_scale = pitch_scales[randi() % pitch_scales.size()] + 1
+	chomp.play()
