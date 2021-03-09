@@ -11,6 +11,9 @@ onready var detectionZone = $"AI/DectectionZone"
 onready var healthbar = $"Position2D/HealthBar"
 onready var sprite_base = $Sprite
 
+onready var hitSound = $HitSound
+var pitch_scales = [0.9, 1.0, 1.2, 1.4]
+
 var motion = Vector2(0,0)
 var isFrozen = false;
 var state: int = IDLE
@@ -84,6 +87,7 @@ func hit(damage):
 		queue_free()
 
 
+
 func _on_EnemyHitbox_area_entered(area):
 	if(state != FROZEN):
 		if (area.name == "SwordArea" and state != HURT):
@@ -91,14 +95,18 @@ func _on_EnemyHitbox_area_entered(area):
 				hit(thrown_damage)
 				toggle_frozen(true)
 			elif(area.get_parent().is_returning()):
+				HitSoundEffect.hit_sound_effect()
 				hit(thrown_damage)
 			elif(area.get_parent().is_idle()): 
 				if (area.get_parent().has_mana_damage()):
 					area.get_parent().use_up_mana()
+					HitSoundEffect.hit_sound_effect()
 					hit(swing_damage * 2)
 				else:
+					HitSoundEffect.hit_sound_effect()
 					hit(swing_damage)
 			else:
+				HitSoundEffect.hit_sound_effect()
 				hit(thrown_damage)
 	
 
@@ -156,3 +164,5 @@ func modulate_if_frozen():
 		sprite_base.self_modulate = Color(0,2, 2)
 	else:
 		sprite_base.self_modulate = Color(1, 1, 1)
+
+

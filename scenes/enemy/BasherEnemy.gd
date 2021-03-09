@@ -15,7 +15,6 @@ export var SPEED:int = 10
 var list_of_speed = [100, 110, 120, 130, 140]
 var last_player_position; 
 var player = null
-var pitch_scales = [0.9, 1.0, 1.2, 1.4]
 var can_bash = true
 var is_bashing = false
 var is_facing_right = false

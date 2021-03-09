@@ -13,7 +13,6 @@ signal animate_walk
 
 var is_facing_right = false
 
-var pitch_scales = [0.9, 1.0, 1.2, 1.4]
 onready var fire = $Fire
 
 func _ready():

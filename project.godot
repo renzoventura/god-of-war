@@ -19,6 +19,10 @@ config/name="Axe Dude"
 run/main_scene="res://scenes/level/LEVELS/Level1.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+HitSoundEffect="*res://scenes/level/HitSoundEffect.gd"
+
 [debug]
 
 settings/fps/force_fps=60

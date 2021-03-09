@@ -85,7 +85,7 @@ SPEED = 500
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 4
-frame = 2
+frame = 4
 
 [node name="BasherSpritePlayer" type="AnimationPlayer" parent="Sprite" index="0"]
 anims/bash = SubResource( 1 )
