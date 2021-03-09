@@ -13,6 +13,9 @@ signal animate_walk
 
 var is_facing_right = false
 
+var pitch_scales = [0.9, 1.0, 1.2, 1.4]
+onready var fire = $Fire
+
 func _ready():
 	randomize()
 	health = 4
@@ -36,6 +39,7 @@ func attack_feature():
 	animate_idle()
 	update_color_if_cooldown()
 	if(canAttack):
+		fire_sound_effect()
 		fireBullet()
 		canAttack = false
 
@@ -44,8 +48,6 @@ func attack_mode_on():
 #		print(bullet_timer.wait_time)
 		bullet_timer.start()
 
-
-	
 func fireBullet():
 	var player = get_tree().get_root().find_node("Player", true, false)
 	var player_direction = (player.global_position)
@@ -79,5 +81,8 @@ func update_color_if_cooldown():
 	else:
 #		print("NOT attack")
 		sprite.modulate = Color(1,1,1)
-		
+
+func fire_sound_effect():
+	fire.pitch_scale = pitch_scales[randi() % pitch_scales.size()] + 0.3
+	fire.play()
 
