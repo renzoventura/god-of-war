@@ -1,10 +1,10 @@
-extends Sprite
+extends AnimationPlayer
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-onready var animation_player = $"AnimationPlayer"
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,19 +16,10 @@ func _ready():
 #	pass
 
 
-
-func _on_SlowBigEnemy_animate_hurt():
-	animation_player.play("hurt")
-
-
-
-func _on_SlowBigEnemy_animate_walk(is_facing_right):
-	animation_player.play("walk")
+func _on_BossEnemy_animate_idle(is_facing_right):
+	play("Idle")
 	if(!is_facing_right):
-		flip_h = true
+		get_parent().flip_h = true
 	else:
-		flip_h = false
+		get_parent().flip_h = false
 
-
-func _on_BossEnemy_animate_idle():
-	pass # Replace with function body.

@@ -4,13 +4,15 @@ var player = null
 export var SPEED:int = 30
 onready var weapons = $"Weapons"
 onready var orbsRandomizer = $"OrbsRandomizer"
+
+onready var sprite = $"Sprite"
 var spin_value = 0
 
 var orb_spin_multiplier = 2
 var orb_position_speed = 0.4
 var value = orb_position_speed
 var moved_value = 0
-var max_moved_value = 30
+var max_moved_value = 25
 var max_negative_moved_value = -30
 
 var orb_spin_multiplier_list = [1.5, 2, 2.5]
@@ -18,10 +20,15 @@ var orb_position_speed_list = [0.4, 0.7, 1]
 var max_moved_value_list = [30, 50, 80] 
 var max_negative_moved_value_list = [-30, 0] 
 
+signal animate_idle
+
+var is_facing_right = false
+
+var color_damage = 1.3
 func _ready():
 	randomize()
-	health = 100
-	maxhealth = 100
+	health = 150
+	maxhealth = 150
 	isntanced_position = global_position;
 	healthText.text = generate_health_string()
 	set_up_health_bar()
@@ -31,15 +38,24 @@ func _ready():
 func attack_feature():
 	spin_orbs()
 	move_orbs()
+	chase_player()
+	sprite.modulate = Color(1,1,1)
 
 func hurt():
 	state_label.text = "HURT"
 	spin_orbs()
 	move_orbs()
-
+	chase_player()
+	sprite.modulate = Color(color_damage,color_damage,color_damage)
+	
+	
 func frozen_feature():
 	spin_orbs()
-
+	move_orbs()
+	chase_player()
+	
+	sprite.modulate = Color(color_damage,color_damage,color_damage)
+	sprite.modulate = Color(1,1,1)
 func spin_orbs():
 	weapons.set_rotation_degrees(get_rotation()) 
 	update_rotation(weapons.rotation_degrees)
@@ -78,6 +94,9 @@ func update_moved_value():
 	elif(moved_value < max_negative_moved_value):
 		value = orb_position_speed
 
+func animate_idle():
+	emit_signal("animate_idle", is_facing_right)
+	
 func spawn_rangers_1():
 	print("Spawning rangers 1 ")
 	
@@ -97,3 +116,10 @@ func _on_OrbsRandomizer_timeout():
 	max_moved_value = max_moved_value_list[randi() % max_moved_value_list.size()]
 #	max_negative_moved_value = max_negative_moved_value_list[randi() % max_negative_moved_value_list.size()]
 	pass # Replace with function body.
+
+func chase_player():
+	player = get_tree().get_root().find_node("Player", true, false)
+	var player_direction = player.position - self.position
+#	print(player_direction)
+	is_facing_right = player_direction.x > 0
+	animate_idle()

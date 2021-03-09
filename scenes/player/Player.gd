@@ -29,11 +29,13 @@ onready var staminaChargerTimer = $"StaminaChargerTimer"
 onready var hurtTimer = $"HurtTimer"
 onready var playerStateLabel = $"PlayerState"
 onready var sprite = $"SpriteAnimation"
+onready var camera = $Camera2D
 
 var is_charged : bool = false
 var axe_mana : int = 0
 var is_invinsible : bool = false
 var is_facing_right : bool = true
+var shake_amount : int =  3
 
 signal animate_walk;
 signal animate_dodge;
@@ -186,6 +188,7 @@ func _on_HitBox_body_entered(body):
 func damage():
 	if(lives >= 1):
 		lives = lives - 1
+		shake_camera()
 		update_lives_gui()
 	
 func _on_HurtTimer_timeout():
@@ -207,3 +210,6 @@ func animate_hurt():
 
 func animate_dash():
 	emit_signal("animate_dodge")
+
+func shake_camera():
+	camera.set_offset(Vector2(rand_range(-1.0, 1.0) * shake_amount, rand_range(-1.0, 1.0) * shake_amount))

@@ -11,6 +11,10 @@ script = ExtResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -48, 72 )
+z_index = 1
+
+[node name="Sword" parent="Player/Center/offset/Node2D" index="0"]
+z_index = 2
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -34,3 +38,5 @@ z_as_relative = false
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
+
+[editable path="Player"]
