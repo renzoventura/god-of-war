@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/orbs.wav-82560db411cd7d3fce2bf006333c32ab.sample"
+
+[deps]
+
+source_file="res://soundeffects/enemy/orbs.wav"
+dest_files=[ "res://.import/orbs.wav-82560db411cd7d3fce2bf006333c32ab.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy/BossEnemy.gd" type="Script" id=2]
 [ext_resource path="res://scenes/enemy/Orbs.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemy/BossSpritePlayer.gd" type="Script" id=4]
 [ext_resource path="res://assets/enemy/boss-Sheet.png" type="Texture" id=5]
+[ext_resource path="res://soundeffects/enemy/orbs.wav" type="AudioStream" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -101,5 +102,9 @@ wait_time = 5.0
 
 [node name="HealthBar" parent="Position2D" index="0"]
 visible = false
+
+[node name="orb" type="AudioStreamPlayer2D" parent="." index="12"]
+stream = ExtResource( 6 )
+volume_db = -10.0
 [connection signal="animate_idle" from="." to="Sprite/BossSpritePlayer" method="_on_BossEnemy_animate_idle"]
 [connection signal="timeout" from="OrbsRandomizer" to="." method="_on_OrbsRandomizer_timeout"]

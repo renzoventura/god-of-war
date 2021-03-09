@@ -5,25 +5,24 @@ export var SPEED:int = 30
 onready var weapons = $"Weapons"
 onready var orbsRandomizer = $"OrbsRandomizer"
 onready var sprite = $"Sprite"
-var spin_value = 0
+onready var orb_sound = $orb
 
+var spin_value = 0
 var orb_spin_multiplier = 2
 var orb_position_speed = 0.4
 var value = orb_position_speed
 var moved_value = 0
 var max_moved_value = 25
 var max_negative_moved_value = -30
-
 var orb_spin_multiplier_list = [1.5, 2, 2.5]
 var orb_position_speed_list = [0.4, 0.7, 1]
 var max_moved_value_list = [30, 50, 80] 
 var max_negative_moved_value_list = [-30, 0] 
+var is_facing_right = false
+var color_damage = 1.3
 
 signal animate_idle
 
-var is_facing_right = false
-
-var color_damage = 1.3
 func _ready():
 	randomize()
 	get_tree().call_group("Level", "add_boss_gui")
@@ -57,6 +56,7 @@ func frozen_feature():
 	sprite.modulate = Color(color_damage,color_damage,color_damage)
 	sprite.modulate = Color(1,1,1)
 func spin_orbs():
+	play_orbs_sound()
 	weapons.set_rotation_degrees(get_rotation()) 
 	update_rotation(weapons.rotation_degrees)
 
@@ -130,3 +130,9 @@ func update_boss_health():
 func update_health_bar():
 	healthbar.value = health
 	update_boss_health()
+
+var orb_pitch_scales = [0.9, 1.0, 1.2, 1.4, 1.6, 1.8, 2]
+func play_orbs_sound():
+	if(!orb_sound.playing):
+		orb_sound.pitch_scale = orb_pitch_scales[randi() % orb_pitch_scales.size()]
+		orb_sound.play()
