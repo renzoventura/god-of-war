@@ -43,4 +43,6 @@ format = 1
 
 [node name="Gates" type="Node2D" parent="."]
 
+[node name="Labels" type="Node2D" parent="."]
+
 [editable path="Player"]
