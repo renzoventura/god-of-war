@@ -147,3 +147,6 @@ func hit(damage):
 	if(health <= 0):
 		update_boss_health()
 		queue_free()
+
+func play_frozen_effect():
+	pass

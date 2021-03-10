@@ -7,6 +7,7 @@ var spin_value = 0
 var list_of_speed = [15, 20, 25, 30, 35, 40]
 signal animate_hurt
 signal animate_walk
+onready var orb_sound_effect = $"OrbSoundEffect"
 
 var is_facing_right = false
 var list_of_rotation_speed = [PI/1.5, PI/2, PI/3, PI/2.5]
@@ -44,6 +45,7 @@ func frozen_feature():
 	spin_orbs()
 
 func spin_orbs():
+	play_orbs_sound()
 	weapons.set_rotation_degrees(get_rotation()) 
 	update_rotation(weapons.rotation_degrees)
 
@@ -72,4 +74,9 @@ func return_to_instanced_area():
 		is_facing_right = round(player_direction.x) >= 1
 		emit_signal("animate_walk", is_facing_right)
 		move_and_slide(return_speed * player_direction.normalized())
-
+		
+var orb_pitch_scales = [0.9, 1.0, 1.2,]
+func play_orbs_sound():
+	if(!orb_sound_effect.playing):
+		orb_sound_effect.pitch_scale = orb_pitch_scales[randi() % orb_pitch_scales.size()]
+		orb_sound_effect.play()
