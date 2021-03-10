@@ -230,3 +230,5 @@ func dash_sound_effect():
 
 func power_sound_effect():
 	powerup.play()
+
+
