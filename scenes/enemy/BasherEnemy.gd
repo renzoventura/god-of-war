@@ -38,11 +38,12 @@ func chase_player():
 	
 func bash_attack():
 	var player = get_tree().get_root().find_node("Player", true, false)
-	var player_direction = last_player_position
-	is_facing_right = player_direction.x > 0
-	animate_bashing()
-#	chomp_sound_effect()
-	move_and_slide(BASH_SPEED * player_direction.normalized())
+	if(last_player_position != null):
+		var player_direction = last_player_position
+		is_facing_right = player_direction.x > 0
+		animate_bashing()
+	#	chomp_sound_effect()
+		move_and_slide(BASH_SPEED * player_direction.normalized())
 
 func _on_AttackRange2_body_entered(body):
 	if (state == ATTACK):

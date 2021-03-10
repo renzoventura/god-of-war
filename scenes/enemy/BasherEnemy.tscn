@@ -100,7 +100,6 @@ visible = true
 visible = true
 
 [node name="DectectionZone" parent="AI" index="0"]
-visible = true
 scale = Vector2( 3, 3 )
 
 [node name="State" parent="." index="4"]

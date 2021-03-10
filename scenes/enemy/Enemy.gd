@@ -22,7 +22,6 @@ var health = 10
 var maxhealth = 10
 var return_speed = 50
 # Called when the node enters the scene tree for the first time.
-
 var isntanced_position
 
 func _ready():
@@ -165,3 +164,5 @@ func play_frozen_effect():
 	if(!frozen_sound_effect.playing):
 		frozen_sound_effect.pitch_scale = pitch_scales[randi() % pitch_scales.size()]
 		frozen_sound_effect.play()
+
+	

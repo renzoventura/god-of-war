@@ -76,7 +76,7 @@ func update_color_if_cooldown():
 #	print("canAttack: " + str(canAttack))
 	if(canAttack):
 #		print("can attack")
-		sprite.modulate = Color(255, 75 ,75)
+		sprite.modulate = Color(1,1,1)
 	else:
 #		print("NOT attack")
 		sprite.modulate = Color(1,1,1)

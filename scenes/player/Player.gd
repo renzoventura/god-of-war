@@ -82,7 +82,7 @@ func updateSpeed():
 		MAX_SPEED = SPEED;
 	else:
 		if(is_thrown):
-			SPEED = 150;
+			SPEED = 130;
 			MAX_SPEED = SPEED;
 		else: 
 			SPEED = 100;
@@ -245,14 +245,11 @@ onready var lowhealth_timer = $"lowhealth/lowhealthTimer"
 
 func lowhealth_effect():
 	if(low_health_can_play):
-
 		if(!lowhealth.playing and lives < 2 and lives != 0):
 			low_health_can_play = false
 			lowhealth_timer.start()
 #			lowhealth.pitch_scale = pitch_scales[randi() % pitch_scales.size()] + 0.2
 			lowhealth.play()
-
-
 
 func _on_lowhealthTimer_timeout():
 	low_health_can_play = true

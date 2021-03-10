@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/enemy/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/enemy/training_dummy.png" type="Texture" id=2]
+[ext_resource path="res://scenes/enemy/TrainingDummy.gd" type="Script" id=3]
+
+[node name="TrainingDummy" instance=ExtResource( 1 )]
+scale = Vector2( 2, 2 )
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="State" parent="." index="4"]
+visible = false
+
+[node name="HealthBar" parent="Position2D" index="0"]
+visible = false

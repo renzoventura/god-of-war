@@ -41,4 +41,6 @@ tile_set = ExtResource( 2 )
 cell_size = Vector2( 16, 16 )
 format = 1
 
+[node name="Gates" type="Node2D" parent="."]
+
 [editable path="Player"]

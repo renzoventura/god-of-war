@@ -44,7 +44,6 @@ modulate = Color( 1, 0.294118, 0.294118, 1 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 3
-frame = 1
 
 [node name="RangeAnimation" type="AnimationPlayer" parent="Sprite" index="0"]
 anims/hurt = SubResource( 1 )
@@ -55,7 +54,6 @@ script = ExtResource( 4 )
 visible = false
 
 [node name="DectectionZone" parent="AI" index="0"]
-visible = true
 scale = Vector2( 2, 2 )
 
 [node name="State" parent="." index="4"]
@@ -69,7 +67,7 @@ one_shot = true
 
 [node name="Fire" type="AudioStreamPlayer2D" parent="." index="10"]
 stream = ExtResource( 5 )
-volume_db = 10.0
+volume_db = 5.0
 [connection signal="animate_hurt" from="." to="Sprite/RangeAnimation" method="_on_RangeEnemy_animate_hurt"]
 [connection signal="animate_walk" from="." to="Sprite/RangeAnimation" method="_on_RangeEnemy_animate_walk"]
 [connection signal="timeout" from="BulletSpawner" to="." method="_on_BulletSpawner_timeout"]
