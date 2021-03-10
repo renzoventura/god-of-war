@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/player/SpriteAnimation.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/player/Player.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://soundeffects/player/swing.wav" type="AudioStream" id=4]
 [ext_resource path="res://soundeffects/player/powerup.wav" type="AudioStream" id=5]
 [ext_resource path="res://soundeffects/player/hitmarker_2.wav" type="AudioStream" id=6]
+[ext_resource path="res://soundeffects/player/impact.wav" type="AudioStream" id=7]
+[ext_resource path="res://soundeffects/player/low_health.wav" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -77,6 +79,17 @@ volume_db = 5.0
 [node name="Footsteps" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
 volume_db = -10.0
+
+[node name="lowhealth" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+volume_db = -10.0
+
+[node name="lowhealthTimer" type="Timer" parent="lowhealth"]
+wait_time = 0.5
+
+[node name="Impact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 7 )
+volume_db = 15.0
 [connection signal="animate_dodge" from="." to="SpriteAnimation" method="_on_Player_animate_dodge"]
 [connection signal="animate_hurt" from="." to="SpriteAnimation" method="_on_Player_animate_hurt"]
 [connection signal="animate_walk" from="." to="SpriteAnimation" method="_on_Player_animate_walk"]
@@ -85,3 +98,4 @@ volume_db = -10.0
 [connection signal="timeout" from="DashTimer" to="." method="_on_DashTimer_timeout"]
 [connection signal="timeout" from="StaminaChargerTimer" to="." method="_on_StaminaCharger_timeout"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_HurtTimer_timeout"]
+[connection signal="timeout" from="lowhealth/lowhealthTimer" to="." method="_on_lowhealthTimer_timeout"]

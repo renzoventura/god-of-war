@@ -32,6 +32,8 @@ onready var sprite = $"SpriteAnimation"
 onready var camera = $Camera2D
 onready var swingSfx = $"AudioStreamPlayer2D"
 onready var powerup = $"PowerUp"
+onready var impact = $"Impact"
+onready var lowhealth = $"lowhealth"
 
 var is_charged : bool = false
 var axe_mana : int = 0
@@ -49,6 +51,7 @@ func _ready():
 	staminaChargerTimer.start()
 
 func _process(delta):
+	lowhealth_effect()
 	update_stamina_gui()
 	match state:
 		IDLE:
@@ -199,6 +202,7 @@ func damage():
 	if(lives >= 1):
 		lives = lives - 1
 		shake_camera()
+		impact_sound_effect()
 		update_lives_gui()
 	
 func _on_HurtTimer_timeout():
@@ -229,6 +233,26 @@ func dash_sound_effect():
 	swingSfx.play()
 
 func power_sound_effect():
+	powerup.pitch_scale = pitch_scales[randi() % pitch_scales.size()]
 	powerup.play()
 
+func impact_sound_effect():
+	impact.pitch_scale = pitch_scales[randi() % pitch_scales.size()]
+	impact.play()
 
+var low_health_can_play = true
+onready var lowhealth_timer = $"lowhealth/lowhealthTimer"
+
+func lowhealth_effect():
+	if(low_health_can_play):
+
+		if(!lowhealth.playing and lives < 2 and lives != 0):
+			low_health_can_play = false
+			lowhealth_timer.start()
+#			lowhealth.pitch_scale = pitch_scales[randi() % pitch_scales.size()] + 0.2
+			lowhealth.play()
+
+
+
+func _on_lowhealthTimer_timeout():
+	low_health_can_play = true
