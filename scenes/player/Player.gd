@@ -32,6 +32,7 @@ onready var sprite = $"SpriteAnimation"
 onready var camera = $Camera2D
 onready var swingSfx = $"AudioStreamPlayer2D"
 onready var powerup = $"PowerUp"
+
 var is_charged : bool = false
 var axe_mana : int = 0
 var is_invinsible : bool = false
@@ -67,7 +68,7 @@ func hurting():
 func idle():
 	playerStateLabel.text = "IDLE"
 	move()
-	animate_walk()
+#	animate_walk()
 	move_sword()
 	dash()
 	move_and_slide(motion)
@@ -87,15 +88,19 @@ func updateSpeed():
 func move():
 	updateSpeed()
 	if Input.is_action_pressed("up"):
+		animate_walk()
 		motion.y = clamp(motion.y - SPEED, -MAX_SPEED, 0)
 	elif Input.is_action_pressed("down"):
+		animate_walk()
 		motion.y = clamp(motion.y + SPEED, 0, MAX_SPEED)
 	else: 
 		motion.y = lerp(motion.y, 0, FRICTION)
 	if Input.is_action_pressed("left"):
+		animate_walk()
 		motion.x = clamp(motion.x - SPEED, -MAX_SPEED, 0)
 		is_facing_right = false
 	elif Input.is_action_pressed("right"):
+		animate_walk()
 		motion.x = clamp(motion.x + SPEED, 0, MAX_SPEED)
 		is_facing_right = true
 	else: 
@@ -225,4 +230,3 @@ func dash_sound_effect():
 
 func power_sound_effect():
 	powerup.play()
-

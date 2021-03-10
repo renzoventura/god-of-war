@@ -55,6 +55,7 @@ script = ExtResource( 4 )
 visible = false
 
 [node name="DectectionZone" parent="AI" index="0"]
+visible = true
 scale = Vector2( 2, 2 )
 
 [node name="State" parent="." index="4"]

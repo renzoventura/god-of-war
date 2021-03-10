@@ -5,8 +5,9 @@ extends Sprite
 # var a = 2
 # var b = "text"
 onready var animation_player = $SpritePlayer
+onready var footSteps = $"FootSteps"
 
-# Called when the node enters the scene tree for the first time.
+var pitch_scales = [0.9, 1.0, 1.2, 1.4]
 func _ready():
 	pass # Replace with function body.
 
@@ -25,3 +26,9 @@ func _on_Player_animate_hurt():
 
 func _on_Player_animate_dodge():
 	animation_player.play("dash")
+
+
+func foot_step_effect():
+	if(!footSteps.playing):
+		footSteps.pitch_scale = pitch_scales[randi() % pitch_scales.size()] + 1
+		footSteps.play()
