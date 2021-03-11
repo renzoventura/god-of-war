@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/level/TemplateLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/enemy/BossEnemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/level/manual_tile/Gate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/level/LEVELS/Level8.gd" type="Script" id=4]
+[ext_resource path="res://scenes/environment/DeadSprite.tscn" type="PackedScene" id=5]
 
 [node name="Level8" instance=ExtResource( 1 )]
 script = ExtResource( 4 )
@@ -22,6 +23,399 @@ position = Vector2( 0, -504 )
 
 [node name="Entrance" parent="Gates" index="1" instance=ExtResource( 3 )]
 position = Vector2( 0, 48 )
+
+[node name="DeadSprite" parent="Others" index="0" instance=ExtResource( 5 )]
+position = Vector2( -104, -48 )
+
+[node name="DeadSprite2" parent="Others" index="1" instance=ExtResource( 5 )]
+position = Vector2( -120, -56 )
+
+[node name="DeadSprite3" parent="Others" index="2" instance=ExtResource( 5 )]
+position = Vector2( -120, -40 )
+
+[node name="DeadSprite4" parent="Others" index="3" instance=ExtResource( 5 )]
+position = Vector2( -104, -32 )
+
+[node name="DeadSprite5" parent="Others" index="4" instance=ExtResource( 5 )]
+position = Vector2( -168, -80 )
+
+[node name="DeadSprite6" parent="Others" index="5" instance=ExtResource( 5 )]
+position = Vector2( -154.495, -125.282 )
+
+[node name="DeadSprite7" parent="Others" index="6" instance=ExtResource( 5 )]
+position = Vector2( -137.414, -169.373 )
+
+[node name="DeadSprite8" parent="Others" index="7" instance=ExtResource( 5 )]
+position = Vector2( -221.624, -191.22 )
+
+[node name="DeadSprite9" parent="Others" index="8" instance=ExtResource( 5 )]
+position = Vector2( -258.962, -157.457 )
+
+[node name="DeadSprite10" parent="Others" index="9" instance=ExtResource( 5 )]
+position = Vector2( -290.739, -180.893 )
+
+[node name="DeadSprite11" parent="Others" index="10" instance=ExtResource( 5 )]
+position = Vector2( -274.454, -168.976 )
+
+[node name="DeadSprite12" parent="Others" index="11" instance=ExtResource( 5 )]
+position = Vector2( -288.356, -146.335 )
+
+[node name="DeadSprite13" parent="Others" index="12" instance=ExtResource( 5 )]
+position = Vector2( -287.959, -159.84 )
+
+[node name="DeadSprite14" parent="Others" index="13" instance=ExtResource( 5 )]
+position = Vector2( -274.056, -151.896 )
+
+[node name="DeadSprite15" parent="Others" index="14" instance=ExtResource( 5 )]
+position = Vector2( -272.467, -181.29 )
+
+[node name="DeadSprite16" parent="Others" index="15" instance=ExtResource( 5 )]
+position = Vector2( -285.576, -229.353 )
+
+[node name="DeadSprite17" parent="Others" index="16" instance=ExtResource( 5 )]
+position = Vector2( -283.192, -255.569 )
+
+[node name="DeadSprite18" parent="Others" index="17" instance=ExtResource( 5 )]
+position = Vector2( -259.359, -260.335 )
+
+[node name="DeadSprite19" parent="Others" index="18" instance=ExtResource( 5 )]
+position = Vector2( -271.276, -292.51 )
+
+[node name="DeadSprite20" parent="Others" index="19" instance=ExtResource( 5 )]
+position = Vector2( -241.485, -297.276 )
+
+[node name="DeadSprite21" parent="Others" index="20" instance=ExtResource( 5 )]
+position = Vector2( -216.46, -317.534 )
+
+[node name="DeadSprite22" parent="Others" index="21" instance=ExtResource( 5 )]
+position = Vector2( -195.805, -325.082 )
+
+[node name="DeadSprite23" parent="Others" index="22" instance=ExtResource( 5 )]
+position = Vector2( -187.066, -306.015 )
+
+[node name="DeadSprite24" parent="Others" index="23" instance=ExtResource( 5 )]
+position = Vector2( -150.125, -306.81 )
+
+[node name="DeadSprite25" parent="Others" index="24" instance=ExtResource( 5 )]
+position = Vector2( -105.637, -293.702 )
+
+[node name="DeadSprite26" parent="Others" index="25" instance=ExtResource( 5 )]
+position = Vector2( -49.6301, -307.207 )
+
+[node name="DeadSprite27" parent="Others" index="26" instance=ExtResource( 5 )]
+position = Vector2( -84.585, -348.12 )
+
+[node name="DeadSprite28" parent="Others" index="27" instance=ExtResource( 5 )]
+position = Vector2( -98.0903, -370.364 )
+
+[node name="DeadSprite29" parent="Others" index="28" instance=ExtResource( 5 )]
+position = Vector2( -2.72333, -80.828 )
+
+[node name="DeadSprite30" parent="Others" index="29" instance=ExtResource( 5 )]
+position = Vector2( 31.3231, -128.029 )
+
+[node name="DeadSprite31" parent="Others" index="30" instance=ExtResource( 5 )]
+position = Vector2( 116.439, -211.597 )
+
+[node name="DeadSprite32" parent="Others" index="31" instance=ExtResource( 5 )]
+position = Vector2( 117.987, -244.096 )
+
+[node name="DeadSprite33" parent="Others" index="32" instance=ExtResource( 5 )]
+position = Vector2( 77.7499, -230.942 )
+
+[node name="DeadSprite34" parent="Others" index="33" instance=ExtResource( 5 )]
+position = Vector2( 26.6803, -315.284 )
+
+[node name="DeadSprite35" parent="Others" index="34" instance=ExtResource( 5 )]
+position = Vector2( 5.78821, -343.914 )
+
+[node name="DeadSprite36" parent="Others" index="35" instance=ExtResource( 5 )]
+position = Vector2( -20, -317.082 )
+
+[node name="DeadSprite37" parent="Others" index="36" instance=ExtResource( 5 )]
+position = Vector2( -2.203, -404.519 )
+
+[node name="DeadSprite38" parent="Others" index="37" instance=ExtResource( 5 )]
+position = Vector2( 51.9617, -430.827 )
+
+[node name="DeadSprite39" parent="Others" index="38" instance=ExtResource( 5 )]
+position = Vector2( 101.484, -428.506 )
+
+[node name="DeadSprite40" parent="Others" index="39" instance=ExtResource( 5 )]
+position = Vector2( 108.448, -417.673 )
+
+[node name="DeadSprite41" parent="Others" index="40" instance=ExtResource( 5 )]
+position = Vector2( 120.828, -407.614 )
+
+[node name="DeadSprite42" parent="Others" index="41" instance=ExtResource( 5 )]
+position = Vector2( 120.828, -407.614 )
+
+[node name="DeadSprite43" parent="Others" index="42" instance=ExtResource( 5 )]
+position = Vector2( 146.363, -402.197 )
+
+[node name="DeadSprite44" parent="Others" index="43" instance=ExtResource( 5 )]
+position = Vector2( 171.922, -384.403 )
+
+[node name="DeadSprite45" parent="Others" index="44" instance=ExtResource( 5 )]
+position = Vector2( 194.57, -364.02 )
+
+[node name="DeadSprite46" parent="Others" index="45" instance=ExtResource( 5 )]
+position = Vector2( 223.688, -341.05 )
+
+[node name="DeadSprite47" parent="Others" index="46" instance=ExtResource( 5 )]
+position = Vector2( 167.069, -357.873 )
+
+[node name="DeadSprite48" parent="Others" index="47" instance=ExtResource( 5 )]
+position = Vector2( 133.098, -354.314 )
+
+[node name="DeadSprite49" parent="Others" index="48" instance=ExtResource( 5 )]
+position = Vector2( 101.068, -373.727 )
+
+[node name="DeadSprite50" parent="Others" index="49" instance=ExtResource( 5 )]
+position = Vector2( 76.4796, -393.139 )
+
+[node name="DeadSprite51" parent="Others" index="50" instance=ExtResource( 5 )]
+position = Vector2( 135.686, -375.344 )
+
+[node name="DeadSprite52" parent="Others" index="51" instance=ExtResource( 5 )]
+position = Vector2( 95.2446, -397.992 )
+
+[node name="DeadSprite53" parent="Others" index="52" instance=ExtResource( 5 )]
+position = Vector2( 74.5384, -428.404 )
+
+[node name="DeadSprite54" parent="Others" index="53" instance=ExtResource( 5 )]
+position = Vector2( 28.9201, -458.492 )
+
+[node name="DeadSprite55" parent="Others" index="54" instance=ExtResource( 5 )]
+position = Vector2( -18.9629, -451.051 )
+
+[node name="DeadSprite56" parent="Others" index="55" instance=ExtResource( 5 )]
+position = Vector2( -72.346, -447.169 )
+
+[node name="DeadSprite57" parent="Others" index="56" instance=ExtResource( 5 )]
+position = Vector2( -75.2578, -438.11 )
+
+[node name="DeadSprite58" parent="Others" index="57" instance=ExtResource( 5 )]
+position = Vector2( 87.977, -27.1867 )
+
+[node name="DeadSprite59" parent="Others" index="58" instance=ExtResource( 5 )]
+position = Vector2( 77.2627, -48.6152 )
+
+[node name="DeadSprite60" parent="Others" index="59" instance=ExtResource( 5 )]
+position = Vector2( 101.843, -37.9009 )
+
+[node name="DeadSprite61" parent="Others" index="60" instance=ExtResource( 5 )]
+position = Vector2( 90.498, -49.2455 )
+
+[node name="DeadSprite62" parent="Others" index="61" instance=ExtResource( 5 )]
+position = Vector2( 93.6493, -80.1277 )
+
+[node name="DeadSprite63" parent="Others" index="62" instance=ExtResource( 5 )]
+position = Vector2( 195.12, -77.6067 )
+
+[node name="DeadSprite64" parent="Others" index="63" instance=ExtResource( 5 )]
+position = Vector2( 177.473, -87.6907 )
+
+[node name="DeadSprite65" parent="Others" index="64" instance=ExtResource( 5 )]
+position = Vector2( 182.515, -66.8925 )
+
+[node name="DeadSprite66" parent="Others" index="65" instance=ExtResource( 5 )]
+position = Vector2( 255.624, -110.38 )
+
+[node name="DeadSprite67" parent="Others" index="66" instance=ExtResource( 5 )]
+position = Vector2( 221.59, -136.85 )
+
+[node name="DeadSprite68" parent="Others" index="67" instance=ExtResource( 5 )]
+position = Vector2( 261.926, -147.564 )
+
+[node name="DeadSprite69" parent="Others" index="68" instance=ExtResource( 5 )]
+position = Vector2( 234.195, -129.917 )
+
+[node name="DeadSprite70" parent="Others" index="69" instance=ExtResource( 5 )]
+position = Vector2( 300.655, -263.436 )
+
+[node name="DeadSprite71" parent="Others" index="70" instance=ExtResource( 5 )]
+position = Vector2( 284.489, -255.054 )
+
+[node name="DeadSprite72" parent="Others" index="71" instance=ExtResource( 5 )]
+position = Vector2( 292.273, -247.27 )
+
+[node name="DeadSprite73" parent="Others" index="72" instance=ExtResource( 5 )]
+position = Vector2( 285.687, -229.308 )
+
+[node name="DeadSprite74" parent="Others" index="73" instance=ExtResource( 5 )]
+position = Vector2( 300.273, -236.096 )
+
+[node name="DeadSprite75" parent="Others" index="74" instance=ExtResource( 5 )]
+position = Vector2( 267.941, -251.663 )
+
+[node name="DeadSprite76" parent="Others" index="75" instance=ExtResource( 5 )]
+position = Vector2( 285.304, -267.829 )
+
+[node name="DeadSprite77" parent="Others" index="76" instance=ExtResource( 5 )]
+position = Vector2( 287.101, -225.917 )
+
+[node name="DeadSprite78" parent="Others" index="77" instance=ExtResource( 5 )]
+position = Vector2( 258.96, -229.51 )
+
+[node name="DeadSprite79" parent="Others" index="78" instance=ExtResource( 5 )]
+position = Vector2( 251.775, -275.613 )
+
+[node name="DeadSprite80" parent="Others" index="79" instance=ExtResource( 5 )]
+position = Vector2( -174.262, -261.228 )
+
+[node name="DeadSprite88" parent="Others" index="80" instance=ExtResource( 5 )]
+position = Vector2( -125.508, -256.796 )
+
+[node name="DeadSprite89" parent="Others" index="81" instance=ExtResource( 5 )]
+position = Vector2( -155.425, -249.04 )
+
+[node name="DeadSprite90" parent="Others" index="82" instance=ExtResource( 5 )]
+position = Vector2( -214.151, -230.203 )
+
+[node name="DeadSprite91" parent="Others" index="83" instance=ExtResource( 5 )]
+position = Vector2( -179.802, -171.477 )
+
+[node name="DeadSprite92" parent="Others" index="84" instance=ExtResource( 5 )]
+position = Vector2( -200.855, -142.668 )
+
+[node name="DeadSprite93" parent="Others" index="85" instance=ExtResource( 5 )]
+position = Vector2( -178.694, -124.94 )
+
+[node name="DeadSprite94" parent="Others" index="86" instance=ExtResource( 5 )]
+position = Vector2( -66.7825, -91.6989 )
+
+[node name="DeadSprite95" parent="Others" index="87" instance=ExtResource( 5 )]
+position = Vector2( -31.3253, -71.7543 )
+
+[node name="DeadSprite96" parent="Others" index="88" instance=ExtResource( 5 )]
+position = Vector2( -49.0539, -131.588 )
+
+[node name="DeadSprite97" parent="Others" index="89" instance=ExtResource( 5 )]
+position = Vector2( -54.5941, -55.1337 )
+
+[node name="DeadSprite98" parent="Others" index="90" instance=ExtResource( 5 )]
+position = Vector2( 51.7773, -93.915 )
+
+[node name="DeadSprite99" parent="Others" index="91" instance=ExtResource( 5 )]
+position = Vector2( 72.83, -167.045 )
+
+[node name="DeadSprite100" parent="Others" index="92" instance=ExtResource( 5 )]
+position = Vector2( -165.397, -359.843 )
+
+[node name="DeadSprite101" parent="Others" index="93" instance=ExtResource( 5 )]
+position = Vector2( -137.697, -382.004 )
+
+[node name="DeadSprite102" parent="Others" index="94" instance=ExtResource( 5 )]
+position = Vector2( -174.262, -346.547 )
+
+[node name="DeadSprite103" parent="Others" index="95" instance=ExtResource( 5 )]
+position = Vector2( -226.339, -333.25 )
+
+[node name="DeadSprite104" parent="Others" index="96" instance=ExtResource( 5 )]
+position = Vector2( -229.663, -314.414 )
+
+[node name="DeadSprite105" parent="Others" index="97" instance=ExtResource( 5 )]
+position = Vector2( -232.987, -347.655 )
+
+[node name="DeadSprite106" parent="Others" index="98" instance=ExtResource( 5 )]
+position = Vector2( -257.364, -346.547 )
+
+[node name="DeadSprite107" parent="Others" index="99" instance=ExtResource( 5 )]
+position = Vector2( 190.282, -305.549 )
+
+[node name="DeadSprite108" parent="Others" index="100" instance=ExtResource( 5 )]
+position = Vector2( 68.3978, -338.79 )
+
+[node name="DeadSprite109" parent="Others" index="101" instance=ExtResource( 5 )]
+position = Vector2( 46.2371, -366.491 )
+
+[node name="DeadSprite110" parent="Others" index="102" instance=ExtResource( 5 )]
+position = Vector2( 66.1818, -312.198 )
+
+[node name="DeadSprite111" parent="Others" index="103" instance=ExtResource( 5 )]
+position = Vector2( 22.9684, -272.308 )
+
+[node name="DeadSprite112" parent="Others" index="104" instance=ExtResource( 5 )]
+position = Vector2( -15.8127, -274.524 )
+
+[node name="DeadSprite113" parent="Others" index="105" instance=ExtResource( 5 )]
+position = Vector2( -52.3779, -237.959 )
+
+[node name="DeadSprite114" parent="Others" index="106" instance=ExtResource( 5 )]
+position = Vector2( 76.1541, -183.666 )
+
+[node name="DeadSprite115" parent="Others" index="107" instance=ExtResource( 5 )]
+position = Vector2( -5.84039, -155.965 )
+
+[node name="DeadSprite116" parent="Others" index="108" instance=ExtResource( 5 )]
+position = Vector2( 56.2095, -290.037 )
+
+[node name="DeadSprite117" parent="Others" index="109" instance=ExtResource( 5 )]
+position = Vector2( 38.481, -186.99 )
+
+[node name="DeadSprite118" parent="Others" index="110" instance=ExtResource( 5 )]
+position = Vector2( 158.149, -153.749 )
+
+[node name="DeadSprite119" parent="Others" index="111" instance=ExtResource( 5 )]
+position = Vector2( 134.88, -169.261 )
+
+[node name="DeadSprite120" parent="Others" index="112" instance=ExtResource( 5 )]
+position = Vector2( 165.905, -114.967 )
+
+[node name="DeadSprite121" parent="Others" index="113" instance=ExtResource( 5 )]
+position = Vector2( 222.415, -90.5906 )
+
+[node name="DeadSprite122" parent="Others" index="114" instance=ExtResource( 5 )]
+position = Vector2( 131.556, -58.4576 )
+
+[node name="DeadSprite123" parent="Others" index="115" instance=ExtResource( 5 )]
+position = Vector2( 150.392, -60.6737 )
+
+[node name="DeadSprite124" parent="Others" index="116" instance=ExtResource( 5 )]
+position = Vector2( 131.556, -88.3745 )
+
+[node name="DeadSprite125" parent="Others" index="117" instance=ExtResource( 5 )]
+position = Vector2( 297.761, -192.53 )
+
+[node name="DeadSprite126" parent="Others" index="118" instance=ExtResource( 5 )]
+position = Vector2( 268.952, -169.261 )
+
+[node name="DeadSprite127" parent="Others" index="119" instance=ExtResource( 5 )]
+position = Vector2( 290.005, -139.344 )
+
+[node name="DeadSprite128" parent="Others" index="120" instance=ExtResource( 5 )]
+position = Vector2( 205.794, -189.206 )
+
+[node name="DeadSprite129" parent="Others" index="121" instance=ExtResource( 5 )]
+position = Vector2( 236.819, -171.477 )
+
+[node name="DeadSprite130" parent="Others" index="122" instance=ExtResource( 5 )]
+position = Vector2( 273.384, -204.718 )
+
+[node name="DeadSprite131" parent="Others" index="123" instance=ExtResource( 5 )]
+position = Vector2( 273.384, -204.718 )
+
+[node name="DeadSprite81" parent="Others" index="124" instance=ExtResource( 5 )]
+position = Vector2( 248.781, -273.816 )
+
+[node name="DeadSprite82" parent="Others" index="125" instance=ExtResource( 5 )]
+position = Vector2( 175.137, -225.917 )
+
+[node name="DeadSprite83" parent="Others" index="126" instance=ExtResource( 5 )]
+position = Vector2( 155.378, -192.388 )
+
+[node name="DeadSprite84" parent="Others" index="127" instance=ExtResource( 5 )]
+position = Vector2( 152.983, -283.995 )
+
+[node name="DeadSprite85" parent="Others" index="128" instance=ExtResource( 5 )]
+position = Vector2( 212.857, -267.829 )
+
+[node name="DeadSprite86" parent="Others" index="129" instance=ExtResource( 5 )]
+position = Vector2( 243.991, -219.331 )
+
+[node name="DeadSprite87" parent="Others" index="130" instance=ExtResource( 5 )]
+position = Vector2( 305.063, -110.96 )
 [connection signal="open_gate" from="Enemies" to="Gates/Gate" method="_on_Enemies_open_gate"]
 [connection signal="body_entered" from="Gates/Gate" to="." method="_on_Gate_body_entered"]
 
