@@ -29,7 +29,6 @@ scale = Vector2( 2, 2 )
 [node name="GUI" parent="GUIs" instance=ExtResource( 8 )]
 
 [node name="Sprite" type="Sprite" parent="."]
-visible = false
 scale = Vector2( 100, 100 )
 z_index = -10
 texture = ExtResource( 10 )

@@ -18,7 +18,7 @@ func _ready():
 
 func _on_Gate_body_entered(body):
 	if(body.name == "Player"):
-		get_tree().change_scene("res://scenes/level/LEVELS/Level4.tscn")
+		get_tree().change_scene("res://scenes/level/LEVELS/Level5.tscn")
 	pass # Replace with function body.
 
 
