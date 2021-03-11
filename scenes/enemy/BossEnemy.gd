@@ -26,8 +26,8 @@ signal animate_idle
 func _ready():
 	randomize()
 	get_tree().call_group("Level", "add_boss_gui")
-	health = 150
-	maxhealth = 150
+	health = 200
+	maxhealth = 200
 	isntanced_position = global_position;
 	healthText.text = generate_health_string()
 	set_up_health_bar()

@@ -48,4 +48,6 @@ z_index = 1
 
 [node name="Labels" type="Node2D" parent="."]
 
+[node name="Others" type="Node2D" parent="."]
+
 [editable path="Player"]
