@@ -12,7 +12,7 @@ onready var canBashTimer = $"Cooldown"
 onready var chomp = $"Chomp"
 onready var bashDurationTimer = $"BashDuration"
 export var SPEED:int = 10
-var list_of_speed = [100, 110, 120, 130, 140]
+var list_of_speed = [100, 130, 150, 180]
 var last_player_position; 
 var player = null
 var can_bash = true
@@ -20,6 +20,8 @@ var is_bashing = false
 var is_facing_right = false
 func _ready():
 	randomize()
+	health = 16
+	maxhealth = 16
 	BASH_SPEED = list_of_speed[randi() % list_of_speed.size()]
 #	BASH_SPEED = 150
 	isntanced_position = global_position;
@@ -55,10 +57,14 @@ func _on_AttackRange2_body_exited(body):
 
 func _on_AttackHitBox_body_entered(body):
 	player = get_tree().get_root().find_node("Player", true, false)
+	print(body.name)
 	if(body.name == "Player"):
 		last_player_position = -player.position - self.position
 	elif(body.name == "TileMap"):
 		last_player_position = player.position - self.position
+	else:
+		print("random: " + body.name)
+		last_player_position = player.position - Vector2(randi(),randi())
 		
 func idle_feature():
 	animate_idle()

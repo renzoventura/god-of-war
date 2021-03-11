@@ -17,8 +17,8 @@ func _ready():
 	randomize()
 	SPEED = list_of_speed[randi() % list_of_speed.size()]
 	orb_speed = list_of_rotation_speed[randi() % list_of_rotation_speed.size()]
-	health = 25
-	maxhealth = 25
+	health = 40
+	maxhealth = 40
 	isntanced_position = global_position;
 	healthText.text = generate_health_string()
 	set_up_health_bar()
