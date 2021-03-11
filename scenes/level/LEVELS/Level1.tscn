@@ -14,7 +14,7 @@
 script = ExtResource( 8 )
 
 [node name="Player" parent="." index="0"]
-position = Vector2( 0, -1144 )
+position = Vector2( -216, 1232 )
 
 [node name="SlowBigEnemy" parent="Enemies" index="0" instance=ExtResource( 2 )]
 position = Vector2( 171.168, -553.419 )
@@ -101,7 +101,7 @@ margin_right = -100.0
 margin_bottom = 976.0
 text = "PRESS D
 TO GO 
-LEFT"
+RIGHT"
 align = 1
 autowrap = false
 
