@@ -159,13 +159,12 @@ func move_to_point():
 	var move_direction = current_position - self.position
 #	if(!((round(current_position.x) == round(global_position.x)) or (round(current_position.y) == round(global_position.y)))):
 #		move_and_slide(SPEED * move_direction.normalized())
-	print(abs(current_position.distance_to(global_position)))
+#	print(abs(current_position.distance_to(global_position)))
 	if(abs(current_position.distance_to(global_position)) > 5):
 		move_and_slide(SPEED * move_direction.normalized())
 		
 var go_back = false
 func _on_MoveTimer_timeout():
-	print("MOVING!")
 	var list_of_positions = move_positions.get_children()
 	if( list_of_positions.size() > 0):
 		if(go_back):
