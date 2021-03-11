@@ -6,6 +6,7 @@ onready var weapons = $"Weapons"
 onready var orbsRandomizer = $"OrbsRandomizer"
 onready var sprite = $"Sprite"
 onready var orb_sound = $orb
+onready var move_positions = $"SpawnEnemies"
 
 var spin_value = 0
 var orb_spin_multiplier = 2
@@ -19,6 +20,7 @@ var orb_position_speed_list = [0.4, 0.7, 1]
 var max_moved_value_list = [30, 50, 80] 
 var max_negative_moved_value_list = [-30, 0] 
 var is_facing_right = false
+var current_position
 var color_damage = 1.3
 
 signal animate_idle
@@ -28,7 +30,9 @@ func _ready():
 	get_tree().call_group("Level", "add_boss_gui")
 	health = 200
 	maxhealth = 200
+	SPEED = 30
 	isntanced_position = global_position;
+	current_position = isntanced_position
 	healthText.text = generate_health_string()
 	set_up_health_bar()
 	orbsRandomizer.start()
@@ -118,13 +122,6 @@ func _on_OrbsRandomizer_timeout():
 #	max_negative_moved_value = max_negative_moved_value_list[randi() % max_negative_moved_value_list.size()]
 	pass # Replace with function body.
 
-func chase_player():
-	player = get_tree().get_root().find_node("Player", true, false)
-	var player_direction = player.position - self.position
-#	print(player_direction)
-	is_facing_right = player_direction.x > 0
-	animate_idle()
-
 func update_boss_health():
 	get_tree().call_group("BossGUI", "update_health", health, maxhealth)
 
@@ -150,3 +147,34 @@ func hit(damage):
 
 func play_frozen_effect():
 	pass
+
+func chase_player():
+	player = get_tree().get_root().find_node("Player", true, false)
+	var player_direction = player.position - self.position
+	is_facing_right = player_direction.x > 0
+	animate_idle()
+	move_to_point()
+
+func move_to_point():
+	var move_direction = current_position - self.position
+#	if(!((round(current_position.x) == round(global_position.x)) or (round(current_position.y) == round(global_position.y)))):
+#		move_and_slide(SPEED * move_direction.normalized())
+	print(abs(current_position.distance_to(global_position)))
+	if(abs(current_position.distance_to(global_position)) > 5):
+		move_and_slide(SPEED * move_direction.normalized())
+		
+var go_back = false
+func _on_MoveTimer_timeout():
+	print("MOVING!")
+	var list_of_positions = move_positions.get_children()
+	if( list_of_positions.size() > 0):
+		if(go_back):
+			current_position = isntanced_position
+			go_back = false
+		else:
+			var new_position = list_of_positions[randi() % list_of_positions.size()]
+			current_position = new_position.global_position
+			new_position.queue_free()
+			go_back = true
+	else:
+		current_position = isntanced_position
