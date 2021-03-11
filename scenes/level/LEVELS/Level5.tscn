@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/level/TemplateLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/level/LEVELS/Level5.gd" type="Script" id=2]
 [ext_resource path="res://scenes/level/manual_tile/Gate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/environment/DeadSprite.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/others/GameLabels.tscn" type="PackedScene" id=5]
 
 [node name="Level5" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -19,6 +20,14 @@ position = Vector2( 240, -96 )
 is_opened = true
 
 [node name="Entrance" parent="Gates" index="1" instance=ExtResource( 3 )]
+
+[node name="GameLabels" parent="Labels" index="0" instance=ExtResource( 5 )]
+margin_left = 112.0
+margin_top = 40.0
+margin_right = 151.0
+margin_bottom = 62.0
+text = "....."
+autowrap = false
 
 [node name="DeadSprite" parent="Others" index="0" instance=ExtResource( 4 )]
 position = Vector2( 136, -40 )

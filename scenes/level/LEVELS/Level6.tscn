@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/level/TemplateLevel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/level/LEVELS/Level6.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/enemy/BasherEnemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/enemy/SlowBigEnemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/environment/DeadSprite.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/others/GameLabels.tscn" type="PackedScene" id=8]
 
 [node name="Level6" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -70,6 +71,30 @@ position = Vector2( 1512, -528 )
 
 [node name="Entrance" parent="Gates" index="1" instance=ExtResource( 3 )]
 position = Vector2( 0, 24 )
+
+[node name="GameLabels" parent="Labels" index="0" instance=ExtResource( 8 )]
+margin_left = -171.277
+margin_top = -130.111
+margin_right = -79.2765
+margin_bottom = -108.111
+text = "These skulls.."
+autowrap = false
+
+[node name="GameLabels2" parent="Labels" index="1" instance=ExtResource( 8 )]
+margin_left = 302.858
+margin_top = -626.299
+margin_right = 447.858
+margin_bottom = -604.299
+text = "These's belong to..."
+autowrap = false
+
+[node name="GameLabels3" parent="Labels" index="2" instance=ExtResource( 8 )]
+margin_left = 1290.09
+margin_top = -284.481
+margin_right = 1435.09
+margin_bottom = -262.481
+text = "...your predecessors"
+autowrap = false
 
 [node name="DeadSprite" parent="Others" index="0" instance=ExtResource( 7 )]
 position = Vector2( -48, -112 )
