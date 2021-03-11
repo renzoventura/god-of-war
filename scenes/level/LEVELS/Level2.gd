@@ -14,3 +14,17 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_Gate_body_entered(body):
+	if(body.name == "Player"):
+		print("body")
+		get_tree().change_scene("res://scenes/level/LEVELS/Level3.tscn")
+	pass # Replace with function body.
+
+
+func _on_Gate_area_entered(area):
+	if(area.name == "Player"):
+		print("area")
+		get_tree().change_scene("res://scenes/level/LEVELS/Level3.tscn")
+	pass # Replace with function body.

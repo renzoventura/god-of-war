@@ -60,6 +60,7 @@ scale = Vector2( 1, 1.6 )
 visible = true
 
 [node name="CollisionShape2D" parent="EnemyHitbox" index="0"]
+visible = false
 scale = Vector2( 1, 1.5 )
 
 [node name="CollisionShape2D" parent="AI/DectectionZone" index="0"]

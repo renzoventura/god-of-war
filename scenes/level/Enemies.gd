@@ -1,4 +1,4 @@
-extends "res://scenes/level/TemplateLevel.gd"
+extends Node2D
 
 
 # Declare member variables here. Examples:
@@ -14,13 +14,3 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
-
-func _on_Gate_area_entered(area):
-	pass # Replace with function body.
-
-
-func _on_Gate_body_entered(body):
-	if(body.name == "Player"):
-		get_tree().change_scene("res://scenes/level/LEVELS/Level2.tscn")
-	pass # Replace with function body.

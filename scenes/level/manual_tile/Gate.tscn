@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/level/gate_opened.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.2183, 10.6024 )
+extents = Vector2( 18.476, 16.4768 )
 
 [node name="Gate" type="Area2D"]
 scale = Vector2( 1.5, 1.5 )
