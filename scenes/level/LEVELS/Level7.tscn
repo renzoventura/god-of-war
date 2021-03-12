@@ -45,8 +45,7 @@ margin_top = -377.801
 margin_right = 216.705
 margin_bottom = -155.801
 text = "Finish what 
-your 
-ancestors started"
+no one else could"
 autowrap = false
 
 [node name="DeadSprite" parent="Others" index="0" instance=ExtResource( 7 )]

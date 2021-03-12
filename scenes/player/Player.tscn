@@ -90,6 +90,9 @@ wait_time = 0.5
 [node name="Impact" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 7 )
 volume_db = 15.0
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.4
 [connection signal="animate_dodge" from="." to="SpriteAnimation" method="_on_Player_animate_dodge"]
 [connection signal="animate_hurt" from="." to="SpriteAnimation" method="_on_Player_animate_hurt"]
 [connection signal="animate_walk" from="." to="SpriteAnimation" method="_on_Player_animate_walk"]
@@ -99,3 +102,4 @@ volume_db = 15.0
 [connection signal="timeout" from="StaminaChargerTimer" to="." method="_on_StaminaCharger_timeout"]
 [connection signal="timeout" from="HurtTimer" to="." method="_on_HurtTimer_timeout"]
 [connection signal="timeout" from="lowhealth/lowhealthTimer" to="." method="_on_lowhealthTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

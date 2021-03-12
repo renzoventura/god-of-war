@@ -13,3 +13,5 @@ func _ready():
 func update_health(health, maxhealth):
 	boss_life_meter.value = health
 	boss_life_meter.max_value = maxhealth
+	if(health <= 0):
+		boss_life_meter.visible = false

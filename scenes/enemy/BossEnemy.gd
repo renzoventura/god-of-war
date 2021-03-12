@@ -142,6 +142,7 @@ func hit(damage):
 		update_boss_health()
 		health -= damage
 	if(health <= 0):
+		BackgroundMusic.play_win()
 		update_boss_health()
 		queue_free()
 

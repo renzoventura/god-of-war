@@ -89,11 +89,14 @@ text = "These's belong to..."
 autowrap = false
 
 [node name="GameLabels3" parent="Labels" index="2" instance=ExtResource( 8 )]
-margin_left = 1290.09
-margin_top = -284.481
-margin_right = 1435.09
-margin_bottom = -262.481
-text = "...your predecessors"
+margin_left = 1283.74
+margin_top = -328.908
+margin_right = 1428.74
+margin_bottom = -256.908
+text = "...the ones 
+that came 
+before you"
+align = 2
 autowrap = false
 
 [node name="DeadSprite" parent="Others" index="0" instance=ExtResource( 7 )]

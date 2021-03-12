@@ -34,8 +34,8 @@ size_flags_horizontal = 2
 size_flags_vertical = 0
 
 [node name="TextureProgress" type="TextureProgress" parent="Control/VBoxContainer/HBoxContainer"]
-margin_left = 262.0
-margin_right = 762.0
+margin_left = 277.0
+margin_right = 747.0
 margin_bottom = 40.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -43,7 +43,7 @@ texture_under = ExtResource( 3 )
 texture_progress = ExtResource( 2 )
 
 [node name="Control" type="Control" parent="Control/VBoxContainer/HBoxContainer"]
-margin_left = 766.0
-margin_right = 766.0
+margin_left = 751.0
+margin_right = 751.0
 size_flags_horizontal = 2
 size_flags_vertical = 0

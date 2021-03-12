@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-enum {ATTACK, IDLE, DASH, HURT}
+enum {ATTACK, IDLE, DASH, HURT, DEAD}
 
 const FRICTION = 0.1
 const DASH_COST : int = 30
@@ -51,9 +51,16 @@ func _ready():
 	staminaChargerTimer.start()
 
 func _process(delta):
+	print(state)
 	lowhealth_effect()
 	update_stamina_gui()
+#	if(state == DEAD):
+#		print("state is dead")
+#		dead()
+#	else:
 	match state:
+		DEAD:
+			dead()
 		IDLE:
 			idle()
 		DASH:
@@ -61,17 +68,15 @@ func _process(delta):
 		HURT:
 			hurting()
 
+
 func hurting():
 	playerStateLabel.text = "HURT"
 	animate_hurt()
-#	move()
-#	move_sword()
-#	move_and_slide(motion)
+	
 	
 func idle():
 	playerStateLabel.text = "IDLE"
 	move()
-#	animate_walk()
 	move_sword()
 	dash()
 	move_and_slide(motion)
@@ -197,14 +202,20 @@ func _on_HitBox_body_entered(body):
 		damage()
 		hurtTimer.start()
 		state = HURT
-
+onready var deathTimer = $DeathTimer
 func damage():
 	if(lives >= 1):
 		lives = lives - 1
 		shake_camera()
 		impact_sound_effect()
 		update_lives_gui()
-	
+	if(lives <= 0):
+		shake_camera()
+		impact_sound_effect()
+		update_lives_gui()
+		state = DEAD
+		deathTimer.start()
+		
 func _on_HurtTimer_timeout():
 	state = IDLE
 	is_invinsible = false
@@ -245,7 +256,7 @@ onready var lowhealth_timer = $"lowhealth/lowhealthTimer"
 
 func lowhealth_effect():
 	if(low_health_can_play):
-		if(!lowhealth.playing and lives < 2 and lives != 0):
+		if(!lowhealth.playing and lives < 3 and lives != 0):
 			low_health_can_play = false
 			lowhealth_timer.start()
 #			lowhealth.pitch_scale = pitch_scales[randi() % pitch_scales.size()] + 0.2
@@ -253,3 +264,11 @@ func lowhealth_effect():
 
 func _on_lowhealthTimer_timeout():
 	low_health_can_play = true
+	
+func dead():
+	print("DEAD FUNCTION")
+	pass
+
+
+func _on_DeathTimer_timeout():
+	get_tree().call_group("Level", "on_death")

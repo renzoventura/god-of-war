@@ -6,6 +6,9 @@ const tutorial_music = "res://soundeffects/global/tutorial.wav"
 const battle_music = "res://soundeffects/global/main_battle.wav"
 const sad_music = "res://soundeffects/global/sad.wav"
 const mysterious_music = "res://soundeffects/global/mysterious.wav"
+const win_music = "res://soundeffects/global/win.wav"
+const finished_music = "res://soundeffects/global/finished.wav"
+
 func _ready():
 	self.set_pause_mode(2) # Set pause mode to Process
 	set_process(true)
@@ -30,9 +33,17 @@ func play_sad_music():
 	stream = load(sad_music)
 	play()
 
-	
 func play_mysterious():
-	
 	volume_db = -20
 	stream = load(mysterious_music)
+	play()
+
+func play_win():
+	volume_db = -20
+	stream = load(mysterious_music)
+	play()
+
+func play_finished():
+	volume_db = -20
+	stream = load(finished_music)
 	play()
