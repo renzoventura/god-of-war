@@ -1,6 +1,7 @@
 extends Node2D
 
 func _ready():
+	play_music()
 	pass
 #	var image = preload("res://assets/player/cross_hair.png" )
 #	Input.set_custom_mouse_cursor(image)
@@ -13,3 +14,7 @@ func add_boss_gui():
 
 func on_death():
 	get_tree().reload_current_scene()
+
+
+func play_music():
+	BackgroundMusic.play_tutorial_music()

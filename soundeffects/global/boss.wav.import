@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/boss.wav-41062d1b488ea3111f4006031eea36be.sample"
+
+[deps]
+
+source_file="res://soundeffects/global/boss.wav"
+dest_files=[ "res://.import/boss.wav-41062d1b488ea3111f4006031eea36be.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

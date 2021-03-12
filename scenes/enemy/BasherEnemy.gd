@@ -57,13 +57,13 @@ func _on_AttackRange2_body_exited(body):
 
 func _on_AttackHitBox_body_entered(body):
 	player = get_tree().get_root().find_node("Player", true, false)
-	print(body.name)
+#	print(body.name)
 	if(body.name == "Player"):
 		last_player_position = -player.position - self.position
 	elif(body.name == "TileMap"):
 		last_player_position = player.position - self.position
 	else:
-		print("random: " + body.name)
+#		print("random: " + body.name)
 		last_player_position = player.position - Vector2(randi(),randi())
 		
 func idle_feature():

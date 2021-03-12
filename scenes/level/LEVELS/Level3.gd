@@ -8,15 +8,15 @@ extends "res://scenes/level/TemplateLevel.gd"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	play_main_battle_music()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
+func play_main_battle_music():
+	BackgroundMusic.play_battle_music()
 
 func _on_Gate_body_entered(body):
 	if(body.name == "Player"):
 		get_tree().change_scene("res://scenes/level/LEVELS/Level4.tscn")
 	pass # Replace with function body.
+
+

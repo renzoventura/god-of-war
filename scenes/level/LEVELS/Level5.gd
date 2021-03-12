@@ -6,14 +6,12 @@ extends "res://scenes/level/TemplateLevel.gd"
 # var b = "text"
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	play_sad_music()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func play_sad_music():
+	BackgroundMusic.play_sad_music()
 
 
 func _on_Gate_body_entered(body):
@@ -21,6 +19,3 @@ func _on_Gate_body_entered(body):
 		var _change_scene = get_tree().change_scene("res://scenes/level/LEVELS/Level6.tscn")
 	pass # Replace with function body.
 
-
-func _on_Enemies_open_gate():
-	pass # Replace with function body.

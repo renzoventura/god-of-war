@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 HitSoundEffect="*res://scenes/level/HitSoundEffect.gd"
+BackgroundMusic="*res://scenes/global/BackgroundMusic.tscn"
 
 [debug]
 
