@@ -51,7 +51,7 @@ func _ready():
 	staminaChargerTimer.start()
 
 func _process(delta):
-	print(state)
+#	print(state)
 	lowhealth_effect()
 	update_stamina_gui()
 #	if(state == DEAD):
